@@ -1,8 +1,8 @@
 
 export default function AboutPage() {
     return (
-        <>
-            <span className="text-4xl">blog page</span>
-        </>
+        <main className="flex flex-col gap-[32px] row-start-2 items-center  justify-center min-h-dvh">
+            <h1>desde blog</h1>
+        </main>
     )
 }
