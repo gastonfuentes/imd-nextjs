@@ -1,5 +1,6 @@
 import { Banner } from "@/components/Banner";
 import { fetchProperties } from '../lib/fetch-properties';
+import Image from "next/image";
 
 
 export default async function Home() {
@@ -15,11 +16,18 @@ export default async function Home() {
             <h2>{inmueble.title}</h2>
             <div className="flex gap-2">
               {inmueble.images.map((image, index) => (
-                <img
+                /* <img
                   key={index}
                   src={image}
                   alt={`Imagen ${index + 1} de ${inmueble.title}`}
                   className="w-32 h-32 object-cover"
+                /> */
+                <Image
+                  src={image}
+                  alt={`Imagen ${index + 1} de ${inmueble.title}`}
+                  width={150}
+                  height={150}
+                  key={index}
                 />
               ))}
             </div>
