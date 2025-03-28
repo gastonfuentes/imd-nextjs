@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { SimpleInmueble } from '../interfaces/simple-inmueble'
 import Image from 'next/image'
-import placeholder from '../../images/image.png'
+import placeholder from '../../app/images/image.png'
 
 interface Props {
     inmueble: SimpleInmueble
@@ -23,7 +23,7 @@ export const InmuebleCard = ({ inmueble }: Props) => {
                     />
                     <div className="mt-5">
                         <Link
-                            href={`/inmuebles/${inmueble.id}`}
+                            href={`/propiedades/inmuebles/${inmueble.slug}`}
                             className="border rounded-full py-2 px-4 text-xs font-semibold text-gray-100"
                         >
                             Ver mas

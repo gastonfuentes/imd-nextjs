@@ -1,6 +1,6 @@
 import { Banner } from "@/components/Banner";
 import { fetchProperties } from '../lib/fetch-properties';
-import { InmueblesGrid } from "./inmuebles";
+import { InmueblesGrid } from "../inmuebles";
 
 
 export default async function Home() {

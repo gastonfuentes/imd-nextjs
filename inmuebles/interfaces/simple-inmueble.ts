@@ -12,4 +12,5 @@ export interface SimpleInmueble {
     dormitorios: string;
     cochera: string;
     plantas: string;
+    slug: string;
 }

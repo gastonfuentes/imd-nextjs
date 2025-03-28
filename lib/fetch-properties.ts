@@ -1,5 +1,5 @@
-import { InmueblesResponse } from '../app/inmuebles/interfaces/inmuebles-response';
-import { SimpleInmueble } from '../app/inmuebles/interfaces/simple-inmueble';
+import { InmueblesResponse } from '../inmuebles/interfaces/inmuebles-response';
+import { SimpleInmueble } from '../inmuebles/interfaces/simple-inmueble';
 import { extractImagesFromContent } from './extract-images';
 
 export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
@@ -20,8 +20,11 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
         dormitorios: inmueble.acf.dormitorios,
         cochera: inmueble.acf.cochera,
         plantas: inmueble.acf.plantas,
+        slug: inmueble.slug,
     }))
 
     return inmuebles;
 }
+
+
 
