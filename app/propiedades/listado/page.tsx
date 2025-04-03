@@ -47,6 +47,7 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
                         <p>Precio: {inmueble.precio}</p>
                         <p>Ciudad: {inmueble.direccion}</p>
                         <p>Tipo de propiedad: {inmueble.plantas}</p>
+                        <p>Ciudad: {inmueble.ubicacion}</p>
                     </div>
                 ))}
             </div>

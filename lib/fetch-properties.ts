@@ -51,7 +51,7 @@ export const fetchFilteredProperties = async (query: Record<string, string>): Pr
         }
 
         // Filtrar por ciudad
-        if (query.ciudad && !inmueble.ubicacion?.toLowerCase().includes(query.ciudad.toLowerCase())) {
+        if (query.ciudad === "catamarca" && inmueble.ubicacion !== "11") {
             return false; // Excluir inmuebles cuya ubicación no coincida con la ciudad
         }
 
