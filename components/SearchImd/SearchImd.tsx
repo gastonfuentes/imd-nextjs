@@ -1,6 +1,8 @@
+import { SearchButton } from "../SearchButton/SearchButton";
 import { SearchLocation } from "../SearchLocation";
 import { SearchTypeOperation } from "../SearchTypeOperation";
 import { SearchTypeProperty } from "../SearchTypeProperty";
+
 
 
 export function SearchImd() {
@@ -13,6 +15,7 @@ export function SearchImd() {
                 <SearchLocation />
                 <SearchTypeProperty />
             </div>
+            <SearchButton />
         </div>
     )
 }

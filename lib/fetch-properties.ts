@@ -27,6 +27,32 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
 }
 
 
+
+// Nueva función para filtrar inmuebles
+export const fetchFilteredProperties = async (query: Record<string, string>): Promise<SimpleInmueble[]> => {
+
+    console.log('query', query);
+
+
+    const inmuebles = await fetchProperties();
+
+    // Filtrar inmuebles según la operación
+    const filteredInmuebles = inmuebles.filter((inmueble) => {
+        if (query.operacion === "comprar") {
+            return inmueble.id === 49; // Devuelve el inmueble con ID 49 si la operación es "comprar"
+        }
+
+        if (query.operacion === "alquilar") {
+            return inmueble.id === 33; // Devuelve el inmueble con ID 33 si la operación es "vender"
+        }
+
+        return false; // Si no coincide con ninguna operación, no devuelve nada
+    });
+
+    return filteredInmuebles;
+};
+
+
 export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble> => {
     const res: InmueblesResponse[] = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/inmuebles?slug=${slug}`)
         .then((res) => res.json());
@@ -57,5 +83,7 @@ export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble>
 
     return inmueble;
 };
+
+
 
 
