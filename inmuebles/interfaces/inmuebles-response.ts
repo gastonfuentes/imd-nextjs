@@ -6,14 +6,16 @@ export interface InmueblesResponse {
     modified: Date;
     modified_gmt: Date;
     slug: string;
-    status: string;
-    type: string;
+    status: Status;
+    type: Type;
     link: string;
     title: GUID;
     content: Content;
     featured_media: number;
     template: string;
     tipo_inmueble: number[];
+    tipo_operacion: number[];
+    ubicacion: number[];
     class_list: string[];
     acf: Acf;
     _links: Links;
@@ -33,9 +35,17 @@ export interface About {
 }
 
 export interface Cury {
-    name: string;
-    href: string;
+    name: Name;
+    href: Href;
     templated: boolean;
+}
+
+export enum Href {
+    HTTPSAPIWOrgRel = "https://api.w.org/{rel}",
+}
+
+export enum Name {
+    Wp = "wp",
 }
 
 export interface Self {
@@ -44,13 +54,23 @@ export interface Self {
 }
 
 export interface TargetHints {
-    allow: string[];
+    allow: Allow[];
+}
+
+export enum Allow {
+    Get = "GET",
 }
 
 export interface WpTerm {
-    taxonomy: string;
+    taxonomy: Taxonomy;
     embeddable: boolean;
     href: string;
+}
+
+export enum Taxonomy {
+    TipoInmueble = "tipo_inmueble",
+    TipoOperacion = "tipo_operacion",
+    Ubicacion = "ubicacion",
 }
 
 export interface Acf {
@@ -73,4 +93,12 @@ export interface Content {
 
 export interface GUID {
     rendered: string;
+}
+
+export enum Status {
+    Publish = "publish",
+}
+
+export enum Type {
+    Inmuebles = "inmuebles",
 }

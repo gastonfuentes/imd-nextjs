@@ -21,6 +21,9 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
         cochera: inmueble.acf.cochera,
         plantas: inmueble.acf.plantas,
         slug: inmueble.slug,
+        tipo_inmueble: inmueble.tipo_inmueble[0].toString(),
+        tipo_operacion: inmueble.tipo_operacion[0].toString(),
+        ubicacion: inmueble.ubicacion[0].toString(),
     }))
 
     return inmuebles;
@@ -36,17 +39,23 @@ export const fetchFilteredProperties = async (query: Record<string, string>): Pr
 
     const inmuebles = await fetchProperties();
 
-    // Filtrar inmuebles según la operación
+    // Filtrar inmuebles según la operación y la ciudad
     const filteredInmuebles = inmuebles.filter((inmueble) => {
-        if (query.operacion === "comprar") {
-            return inmueble.id === 49; // Devuelve el inmueble con ID 49 si la operación es "comprar"
+        // Filtrar por operación
+        if (query.operacion === "comprar" && inmueble.tipo_operacion !== "7") {
+            return false; // Excluir inmuebles que no tengan tipo_operacion = 7 para "comprar"
         }
 
-        if (query.operacion === "alquilar") {
-            return inmueble.id === 33; // Devuelve el inmueble con ID 33 si la operación es "vender"
+        if (query.operacion === "alquilar" && inmueble.tipo_operacion !== "8") {
+            return false; // Excluir inmuebles que no tengan tipo_operacion = 8 para "alquilar"
         }
 
-        return false; // Si no coincide con ninguna operación, no devuelve nada
+        // Filtrar por ciudad
+        if (query.ciudad && !inmueble.ubicacion?.toLowerCase().includes(query.ciudad.toLowerCase())) {
+            return false; // Excluir inmuebles cuya ubicación no coincida con la ciudad
+        }
+
+        return true; // Incluir el inmueble si pasa todos los filtros
     });
 
     return filteredInmuebles;
@@ -79,6 +88,9 @@ export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble>
         cochera: inmuebleData.acf.cochera,
         plantas: inmuebleData.acf.plantas,
         slug: inmuebleData.slug,
+        tipo_inmueble: inmuebleData.tipo_inmueble[0].toString(),
+        tipo_operacion: inmuebleData.tipo_operacion[0].toString(),
+        ubicacion: inmuebleData.ubicacion[0].toString(),
     };
 
     return inmueble;

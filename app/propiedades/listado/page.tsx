@@ -28,10 +28,6 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
     const propiedadesFiltradas = await fetchFilteredProperties(query); // Filtrar las propiedades según los parámetros de búsqueda
 
 
-
-
-
-
     return (
         <div>
 
