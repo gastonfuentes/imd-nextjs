@@ -1,5 +1,4 @@
 import { fetchTipoInmuebles } from "@/lib/fetch-tipo-inmuebles";
-import { SearchButton } from "../SearchButton/SearchButton";
 import { SearchTypeOperation } from "../SearchTypeOperation";
 import { SimpleTipoInmueble } from "@/inmuebles/interfaces/simple-tipo-inmuebles";
 import { Option, SearchTypePropertySelect } from "../SearchTypeProperty/SearchTypePropertySelect";
@@ -8,7 +7,7 @@ import { SimpleUbicacion } from "@/inmuebles/interfaces/simple-ubicacion";
 
 
 
-export async function SearchImd() {
+export async function SearchImdAdvanced() {
 
 
     // Obtener los tipos de inmuebles y formatearlos al tipo Option
@@ -26,15 +25,11 @@ export async function SearchImd() {
 
 
     return (
-        <div className="flex-col justify-between gap-4 p-8 rounded-md flex backdrop-blur-lg shadow-accent mt-8">
-            <div>
-                <SearchTypeOperation noServer={true} />
-            </div>
-            <div className="flex flex-col gap-4 justify-between">
-                <SearchTypePropertySelect options={ubicaciones} placeholder="Ciudad" queryKey="ubicacion" noServer={true} />
-                <SearchTypePropertySelect options={tipos} queryKey="tipo_inmueble" noServer={true} />
-            </div>
-            <SearchButton />
+        <div className="grid grid-cols-3 gap-2">
+            <SearchTypeOperation noServer={false} />
+            <SearchTypePropertySelect options={ubicaciones} placeholder="Ciudad" queryKey="ubicacion" noServer={false} />
+            <SearchTypePropertySelect options={tipos} queryKey="tipo_inmueble" noServer={false} />
+
         </div>
     )
 }
