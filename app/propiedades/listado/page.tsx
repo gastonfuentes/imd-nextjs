@@ -1,20 +1,23 @@
 
 
-/* import { SearchImd } from "@/components/SearchImd"; */
+
 import { SearchTypeOperation } from "@/components/SearchTypeOperation";
 import { fetchFilteredProperties } from "@/lib/fetch-properties";
 import { z } from "zod";
-/* import { useQueryState, SearchParams } from 'nuqs'; */
-/* import { useEffect, useState } from "react";
-import { SimpleInmueble } from '../../../inmuebles/interfaces/simple-inmueble';
-import { fetchProperties } from "@/lib/fetch-properties"; */
+
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const querySchema = z.object({
-    operacion: z.string().optional(),
-    ciudad: z.string().optional(),
-    tipoPropiedad: z.string().optional(),
+    tipo_operacion: z.string().optional(),
+    ubicacion: z.preprocess(
+        (value) => (typeof value === "string" ? value.split(",") : value),
+        z.array(z.string()).optional()
+    ),
+    tipo_inmueble: z.preprocess(
+        (value) => (typeof value === "string" ? value.split(",") : value),
+        z.array(z.string()).optional()
+    ),
 });
 
 export default async function ListadoPage(props: { searchParams: SearchParams }) {
@@ -46,12 +49,12 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
                         <h2>{inmueble.title}</h2>
                         <p>Precio: {inmueble.precio}</p>
                         <p>Ciudad: {inmueble.direccion}</p>
-                        <p>Tipo de propiedad: {inmueble.plantas}</p>
-                        <p>Ciudad: {inmueble.ubicacion}</p>
+                        <p>Tipo de propiedad: {inmueble.tipo_inmueble_nombre}</p>
+                        <p>Ciudad: {inmueble.ubicacion_nombre}</p>
                     </div>
                 ))}
             </div>
-            <SearchTypeOperation />
+            <SearchTypeOperation noServer={false} />
         </div >
     )
 }

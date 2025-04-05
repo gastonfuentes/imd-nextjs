@@ -16,4 +16,6 @@ export interface SimpleInmueble {
     tipo_inmueble: string;
     tipo_operacion: string;
     ubicacion: string;
+    ubicacion_nombre: string;
+    tipo_inmueble_nombre: string;
 }

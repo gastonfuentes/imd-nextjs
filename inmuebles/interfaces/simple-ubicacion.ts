@@ -1,4 +1,4 @@
-export interface SimpleTipoInmueble {
+export interface SimpleUbicacion {
     name: string;
     id: number;
     count: number;

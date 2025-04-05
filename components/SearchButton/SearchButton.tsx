@@ -14,5 +14,5 @@ export function SearchButton() {
         router.push(`/propiedades/listado${currentSearchParams}`);
     };
 
-    return (<Button variant='destructive' className=" bg-amber-300 text-amber-50" onClick={handleSearch}>Button</Button>)
+    return (<Button variant='destructive' className=" bg-amber-300 text-amber-50" onClick={handleSearch}>Buscar</Button>)
 }
