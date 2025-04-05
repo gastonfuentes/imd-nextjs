@@ -11,7 +11,7 @@ export function SearchTypeOperation({ noServer }: MultiOparationProps) {
     const [operacion, setOperacion] = useQueryState('tipo_operacion', { defaultValue: '', shallow: noServer }); // Valor predeterminado: "alquilar"
 
     return (
-        <Tabs defaultValue={operacion.toString()} className="w-[400px]" onValueChange={(value) => setOperacion(value)}>
+        <Tabs defaultValue={operacion.toString()} className="w-full" onValueChange={(value) => setOperacion(value)}>
             <TabsList className="grid w-full grid-cols-2">
                 <TabsTrigger value='alquilar'>Alquilar</TabsTrigger>
                 <TabsTrigger value="comprar">Comprar</TabsTrigger>

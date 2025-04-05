@@ -1,7 +1,8 @@
 
 
 
-import { SearchTypeOperation } from "@/components/SearchTypeOperation";
+import PropertyCard from "@/components/PropertyCard";
+import { SearchImdAdvanced } from "@/components/SearchImd/SearchImdAdvanced";
 import { fetchFilteredProperties } from "@/lib/fetch-properties";
 import { z } from "zod";
 
@@ -32,29 +33,25 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
 
 
     return (
-        <div>
-
-            {/* <SearchImd /> */}
-
-
-            <h1>Hello soy listado page y recibo parametros de url</h1>
-            {/*  <h2>Operacion: {operacion}</h2>
-            <h2>Operacion: {ciudad}</h2>
-            <h2>Operacion: {tipoPropiedad}</h2> */}
-            <br />
+        <div className="w-5/6 mx-auto mt-8 p-4 rounded-md shadow-md bg-white">
+            <h1>Filtros</h1>
+            <div>
+                <SearchImdAdvanced />
+            </div>
             <h1>Listado de propiedades</h1>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-3 gap-4">
                 {propiedadesFiltradas.map((inmueble) => (
-                    <div key={inmueble.id} className="border p-4 rounded-md shadow-md bg-white">
+                    /* <div key={inmueble.id} className="border p-4 rounded-md shadow-md bg-white">
                         <h2>{inmueble.title}</h2>
                         <p>Precio: {inmueble.precio}</p>
                         <p>Ciudad: {inmueble.direccion}</p>
                         <p>Tipo de propiedad: {inmueble.tipo_inmueble_nombre}</p>
                         <p>Ciudad: {inmueble.ubicacion_nombre}</p>
-                    </div>
+                    </div> */
+                    <PropertyCard key={inmueble.id} images={inmueble.images} slug={inmueble.slug} description={inmueble.descripcion} id={inmueble.id.toString()} title={inmueble.title} price={inmueble.precio} city={inmueble.ubicacion_nombre} location={inmueble.direccion} squareMeters={Number(inmueble.superficie_del_terreno)} bedrooms={Number(inmueble.dormitorios)} bathrooms={Number(inmueble.cochera)} />
                 ))}
             </div>
-            <SearchTypeOperation noServer={false} />
+
         </div >
     )
 }
