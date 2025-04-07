@@ -22,6 +22,7 @@ interface MultiSelectProps {
     className?: string;
     noServer: boolean; // Propiedad para evitar la carga del servidor
     queryKey: string; // Clave de la consulta para nuqs
+    startTransition?: (callback: () => void) => void; // Propiedad opcional para manejar transiciones
 }
 
 export function SearchTypePropertySelect({
@@ -31,12 +32,13 @@ export function SearchTypePropertySelect({
     className,
     noServer, // Propiedad para evitar la carga del servidor
     queryKey, // Clave de la consulta para nuqs
+    startTransition
 }: MultiSelectProps) {
 
 
 
     const [selected, setSelected] = useQueryState<string[]>(queryKey, parseAsArrayOf(parseAsString).withDefault([]).withOptions({
-        shallow: noServer, // Evita recargar la página al actualizar la URL
+        shallow: noServer, startTransition // Evita recargar la página al actualizar la URL
     })); // Sincronizar los tipos seleccionados con la URL usando nuqs
 
     const [open, setOpen] = React.useState(false);
