@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import { Suspense } from "react";
 
 
 const geistSans = Geist({
@@ -31,14 +32,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NuqsAdapter>
-          <Header />
+        <Suspense >
+          <NuqsAdapter>
+            <Header />
 
-          {children}
-          <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-            <h1>sen que onda</h1>
-          </footer>
-        </NuqsAdapter>
+            {children}
+            <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+              <h1>sen que onda</h1>
+            </footer>
+          </NuqsAdapter>
+        </Suspense>
       </body>
     </html>
   );
