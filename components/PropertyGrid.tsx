@@ -24,7 +24,7 @@ export const PropertyGrid = ({ propiedades, tipos, ubicaciones }: { propiedades:
 
                 {isPending ? (
 
-                    <ul className='grid grid-cols-3 gap-4'>
+                    <ul className='grid grid-cols-1 md:grid-cols-3 gap-4'>
 
                         {/* Skeletons de carga */}
                         {Array.from({ length: 8 }).map((_, index) => (
@@ -37,7 +37,7 @@ export const PropertyGrid = ({ propiedades, tipos, ubicaciones }: { propiedades:
 
                 ) : (
 
-                    <ul className='grid grid-cols-3 gap-4'>
+                    <ul className='grid grid-cols-1 md:grid-cols-3 gap-4'>
 
                         {propiedades.map((inmueble) => (
                             <li key={inmueble.id} >
