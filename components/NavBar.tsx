@@ -11,7 +11,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
 
-
 // Definición de los enlaces de navegación
 const navigationLinks = [
     { name: "Inicio", href: "/" },
