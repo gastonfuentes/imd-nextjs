@@ -6,7 +6,7 @@ export default function Loading() {
         <div className="w-5/6 mx-auto mt-8 p-4 rounded-md shadow-md bg-white">
 
             <header className="my-4">
-                <div className='flex justify-end gap-4'>
+                <div className='grid grid-cols-1 md:grid-cols-3 gap-2'>
                     <Skeleton className='h-10 w-full' />
                     <Skeleton className='h-10 w-full' />
                     <Skeleton className='h-10 w-full' />
@@ -14,7 +14,7 @@ export default function Loading() {
             </header>
 
             <div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     {Array.from({ length: 8 }).map((_, index) => (
                         <div key={index} className="w-full max-w-sm mx-auto">
                             <Skeleton className="h-64 w-full rounded-lg" />

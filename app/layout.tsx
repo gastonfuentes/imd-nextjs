@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/Header";
+/* import { Header } from "@/components/Header"; */
 
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from "react";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/NavBar";
 
 
 const geistSans = Geist({
@@ -35,7 +36,8 @@ export default function RootLayout({
       >
         <Suspense >
           <NuqsAdapter>
-            <Header />
+
+            <Navbar />
 
 
             {children}

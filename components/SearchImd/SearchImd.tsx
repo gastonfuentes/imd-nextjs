@@ -26,7 +26,7 @@ export async function SearchImd() {
 
 
     return (
-        <div className="flex-col justify-between gap-4 p-8 rounded-md flex backdrop-blur-lg shadow-accent mt-8">
+        <div className="flex-col justify-between gap-4 p-8 rounded-md flex backdrop-blur-lg shadow-accent mt-8 md:w-1/2 mx-auto">
             <div>
                 <SearchTypeOperation noServer={true} />
             </div>
