@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 
+
 //SOLOS SE EJECUTA EN BUILDTIME
 export async function generateStaticParams() {
 
@@ -99,8 +100,9 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
             < main className="container mx-auto px-4 py-8" >
                 <div className="mb-6">
                     <Link
-                        href="/propiedades"
+                        href='/propiedades/listado'
                         className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-4"
+                        replace={true}
                     >
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Volver a listado

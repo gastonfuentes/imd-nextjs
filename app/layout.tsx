@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from "react";
+import Footer from "@/components/Footer";
 
 
 const geistSans = Geist({
@@ -36,10 +37,12 @@ export default function RootLayout({
           <NuqsAdapter>
             <Header />
 
+
             {children}
-            <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-              <h1>sen que onda</h1>
-            </footer>
+            <Footer />
+
+
+
           </NuqsAdapter>
         </Suspense>
       </body>
