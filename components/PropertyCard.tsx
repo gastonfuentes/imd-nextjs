@@ -55,7 +55,8 @@ export default function PropertyCard({
 
     const handleWhatsAppClick = () => {
         const propertyUrl = `${window.location.origin}/propiedades/inmuebles/${slug}`; // Construir la URL completa de la propiedad
-        const message = `Hola, estoy interesado/a en esta propiedad: ${title} (ID: ${id}). Puedes ver más detalles aquí: ${propertyUrl}`;
+        const imageUrl = images[0] || placeholder; // Usar la primera imagen o un placeholder
+        const message = `Hola, estoy interesado/a en esta propiedad: ${title} (ID: ${id}). Puedes ver más detalles aquí: ${propertyUrl}${imageUrl ? `\n\nImagen: ${imageUrl}` : ""}`;
         const encodedMessage = encodeURIComponent(message);
         window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank");
     };
