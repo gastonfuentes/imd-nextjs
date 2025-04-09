@@ -44,6 +44,11 @@ export async function generateMetadata({ params }: { params: Promise<{ name: str
     return {
         title: inmueble.title,
         description: inmueble.descripcion,
+        openGraph: {
+            title: inmueble.title,
+            description: inmueble.descripcion,
+            images: [` /propiedades/inmuebles/${inmueble.images[0]} `]
+        },
     }
 }
 
