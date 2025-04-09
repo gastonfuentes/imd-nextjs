@@ -20,7 +20,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "IMD Inmobiliaria",
+  title: {
+    template: "%s | IMD Inmobiliaria",
+    default: "IMD Inmobiliaria",
+  },
   description: "pagina de inmobiliaria en neuquen",
 };
 

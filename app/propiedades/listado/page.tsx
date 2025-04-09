@@ -1,6 +1,4 @@
 
-/* import PropertyCard from "@/components/PropertyCard";
-import { SearchImdAdvanced } from "@/components/SearchImd/SearchImdAdvanced"; */
 import { fetchFilteredProperties } from "@/lib/fetch-properties";
 import { z } from "zod";
 import { PropertyGrid } from '../../../components/PropertyGrid';
