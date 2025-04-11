@@ -2,7 +2,7 @@ export interface SimpleInmueble {
     id: number;
     title: string;
     images: string[];
-    descripcion: string;
+    descripcion: string | undefined;
     direccion: string;
     precio: string;
     superficie_construida_total: string;
@@ -15,7 +15,7 @@ export interface SimpleInmueble {
     slug: string;
     tipo_inmueble: string;
     tipo_operacion: string;
-    ubicacion: string;
-    ubicacion_nombre: string;
+    ciudad: string;
+    ciudad_nombre: string;
     tipo_inmueble_nombre: string;
 }

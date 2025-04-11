@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation"
 interface PropertyCardProps {
     id: string
     title: string
-    description: string
+    description: string | undefined
     price: string
     city: string
     location: string
@@ -62,7 +62,7 @@ export default function PropertyCard({
 
 
     return (
-        <Card className="overflow-hidden w-full max-w-md mx-auto " >
+        <Card className="overflow-hidden w-full max-w-md mx-auto pt-0" >
             <div className="relative" >
                 <Carousel className="w-full" >
                     <CarouselContent>

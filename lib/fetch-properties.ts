@@ -38,8 +38,8 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
             tipo_inmueble: inmueble.tipo_inmueble?.[0]?.toString() || "Desconocido",
             tipo_inmueble_nombre: tiposInmueblesMap[inmueble.tipo_inmueble?.[0]?.toString()] || "Desconocido",
             tipo_operacion: inmueble.tipo_operacion?.[0]?.toString(),
-            ubicacion: inmueble.ubicacion?.[0]?.toString(),
-            ubicacion_nombre: ubicacionesMap[inmueble.ubicacion?.[0]?.toString()] || "Desconocido",
+            ciudad: inmueble.ciudades?.[0]?.toString(),
+            ciudad_nombre: ubicacionesMap[inmueble.ciudades?.[0]?.toString()] || "Desconocido",
         }));
     } catch (error) {
         console.error("Error en fetchProperties:", error);
@@ -64,7 +64,7 @@ export const fetchFilteredProperties = async (query: Record<string, string | str
             // Filtrar por ubicaciones
             if (query.ubicacion) {
                 const ubicaciones = Array.isArray(query.ubicacion) ? query.ubicacion : [query.ubicacion];
-                if (!ubicaciones.map((u) => u.toLowerCase()).includes(inmueble.ubicacion_nombre.toLowerCase())) {
+                if (!ubicaciones.map((u) => u.toLowerCase()).includes(inmueble.ciudad_nombre.toLowerCase())) {
                     return false;
                 }
             }
@@ -120,8 +120,8 @@ export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble>
             slug: inmuebleData.slug,
             tipo_inmueble: inmuebleData.tipo_inmueble?.[0]?.toString() || "Desconocido",
             tipo_operacion: inmuebleData.tipo_operacion?.[0]?.toString() || "Desconocido",
-            ubicacion: inmuebleData.ubicacion?.[0]?.toString() || "Desconocido",
-            ubicacion_nombre: "Desconocido",
+            ciudad: inmuebleData.ciudades?.[0]?.toString() || "Desconocido",
+            ciudad_nombre: "Desconocido",
             tipo_inmueble_nombre: "Desconocido",
         };
     } catch (error) {
@@ -158,8 +158,8 @@ export const fetchPropertiesSimple = async (): Promise<SimpleInmueble[]> => {
             tipo_inmueble: inmueble.tipo_inmueble?.[0]?.toString() || "Desconocido",
             tipo_inmueble_nombre: "Desconocido",
             tipo_operacion: inmueble.tipo_operacion?.[0]?.toString(),
-            ubicacion: inmueble.ubicacion?.[0]?.toString(),
-            ubicacion_nombre: "Desconocido",
+            ciudad: inmueble.ciudades?.[0]?.toString(),
+            ciudad_nombre: "Desconocido",
         }));
     } catch (error) {
         console.error("Error en fetchPropertiesSimple:", error);
