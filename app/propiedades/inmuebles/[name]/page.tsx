@@ -96,7 +96,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
             tipo_operacion,
             id,
             tipo_inmueble_nombre,
-            ubicacion_nombre,
+            ciudad_nombre,
         } = inmueble;
 
         return (
@@ -228,7 +228,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                                             <MapPin className="h-5 w-5 mr-3 text-muted-foreground" />
                                             <div>
                                                 <p className="text-sm text-muted-foreground">Ubicación</p>
-                                                <p className="font-medium">{ubicacion_nombre}</p>
+                                                <p className="font-medium">{ciudad_nombre}</p>
                                             </div>
                                         </div>
                                     </div>
