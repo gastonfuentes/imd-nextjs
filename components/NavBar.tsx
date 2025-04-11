@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import Image from "next/image"
 
 
 // Definición de los enlaces de navegación
@@ -62,11 +63,12 @@ export default function Navbar() {
             )}
         >
             <div className="container mx-auto px-4">
-                <div className="flex h-16 items-center justify-between">
+                <div className="flex h-26 items-center justify-between">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-2">
-                        <Home className="h-6 w-6 text-primary" />
-                        <span className="text-xl font-bold">IMD Inmobiliaria</span>
+                        {/* <Home className="h-6 w-6 text-primary" />
+                        <span className="text-xl font-bold">IMD Inmobiliaria</span> */}
+                        <Image src="/secundario-fondo-claro.svg" alt="Logo" width={150} height={56} className="h-24 w-auto" />
                     </Link>
 
                     {/* Desktop Navigation */}

@@ -15,7 +15,7 @@ export interface InmueblesResponse {
     template: string;
     tipo_inmueble: number[];
     tipo_operacion: number[];
-    ubicacion: number[];
+    ciudades: number[];
     class_list: string[];
     acf: Acf;
     _links: Links;
@@ -68,13 +68,13 @@ export interface WpTerm {
 }
 
 export enum Taxonomy {
+    Ciudades = "ciudades",
     TipoInmueble = "tipo_inmueble",
     TipoOperacion = "tipo_operacion",
-    Ubicacion = "ubicacion",
 }
 
 export interface Acf {
-    descripcion: string;
+    descripcion?: string;
     direccion: string;
     precio: string;
     superficie_construida_total: string;
@@ -84,6 +84,7 @@ export interface Acf {
     dormitorios: string;
     cochera: string;
     plantas: string;
+    banios?: string;
 }
 
 export interface Content {
@@ -102,3 +103,4 @@ export enum Status {
 export enum Type {
     Inmuebles = "inmuebles",
 }
+
