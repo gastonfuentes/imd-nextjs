@@ -76,7 +76,7 @@ export const BlogGrid = () => {
                             <CardFooter className="bg-primary p-4">
                                 <Link href={`/blog/${post.slug}`} className="text-primary-foreground hover:underline inline-flex items-center">
                                     Leer más
-                                    <ArrowRight className="ml-1 h-4 w-4" />
+                                    <ArrowRight className="ml-1 h-4 w-4 text-accent" />
                                 </Link>
                             </CardFooter>
                         </Card>

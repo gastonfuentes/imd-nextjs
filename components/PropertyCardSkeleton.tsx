@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 
 export default function PropertyCardSkeleton() {
     return (
-        <Card className="overflow-hidden w-full max-w-md mx-auto">
+        <Card className="overflow-hidden w-full max-w-md mx-auto pt-0">
             {/* Image placeholder */}
             <div className="relative">
                 <Skeleton className="aspect-[4/3] w-full rounded-t-lg" />

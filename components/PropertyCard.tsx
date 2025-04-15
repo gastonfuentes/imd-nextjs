@@ -24,6 +24,7 @@ interface PropertyCardProps {
     images?: string[]
     whatsappNumber?: string
     slug: string
+    operation: string
 }
 
 export default function PropertyCard({
@@ -42,7 +43,8 @@ export default function PropertyCard({
         "/placeholder.svg?height=400&width=600",
     ],
     whatsappNumber = "+5493804218592",
-    slug
+    slug,
+    operation
 }: PropertyCardProps) {
 
     const router = useRouter(); // Inicializar useRouter
@@ -62,7 +64,7 @@ export default function PropertyCard({
 
 
     return (
-        <Card className="overflow-hidden w-full max-w-md mx-auto pt-0" >
+        <Card className="overflow-hidden w-full max-w-md mx-auto pt-0">
             <div className="relative" >
                 <Carousel className="w-full" >
                     <CarouselContent>
@@ -83,7 +85,10 @@ export default function PropertyCard({
                     <CarouselPrevious className="left-2" />
                     <CarouselNext className="right-2" />
                 </Carousel>
-                <Badge className="absolute top-3 left-3 z-10 bg-black/70 text-white">{price}</Badge>
+
+                <Badge className="absolute top-3 left-3 z-10 bg-primary text-white">${price}</Badge>
+                <Badge className="absolute top-3 right-3 z-10 bg-accent text-white">{operation === '7' ? 'Comprar' : 'Alquilar'}</Badge>
+
             </div>
 
             <CardContent className="p-4 cursor-pointer" onClick={() => router.push(`/propiedades/inmuebles/${slug}`)}>

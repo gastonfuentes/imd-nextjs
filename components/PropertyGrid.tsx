@@ -41,7 +41,7 @@ export const PropertyGrid = ({ propiedades, tipos, ubicaciones }: { propiedades:
 
                         {propiedades.map((inmueble) => (
                             <li key={inmueble.id} >
-                                <PropertyCard key={inmueble.id} images={inmueble.images} slug={inmueble.slug} description={inmueble.descripcion} id={inmueble.id.toString()} title={inmueble.title} price={inmueble.precio} city={inmueble.ciudad_nombre} location={inmueble.direccion} squareMeters={Number(inmueble.superficie_del_terreno)} bedrooms={Number(inmueble.dormitorios)} bathrooms={Number(inmueble.cochera)} />
+                                <PropertyCard key={inmueble.id} images={inmueble.images} slug={inmueble.slug} description={inmueble.descripcion} id={inmueble.id.toString()} title={inmueble.title} price={inmueble.precio} city={inmueble.ciudad_nombre} location={inmueble.direccion} squareMeters={Number(inmueble.superficie_del_terreno)} bedrooms={Number(inmueble.dormitorios)} bathrooms={Number(inmueble.cochera)} operation={inmueble.tipo_operacion} />
                             </li>
                         ))}
                     </ul>

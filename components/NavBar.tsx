@@ -60,7 +60,7 @@ export default function Navbar() {
         <header
             className={cn(
                 "sticky top-0 z-50 w-full transition-all duration-300",
-                isScrolled ? "bg-white shadow-md dark:bg-gray-900" : "bg-white/80 backdrop-blur-sm dark:bg-gray-900/80",
+                isScrolled ? "bg-white shadow-md dark:bg-gray-900" : "bg-white dark:bg-gray-900/80",
             )}
         >
             <div className="container mx-auto px-4">

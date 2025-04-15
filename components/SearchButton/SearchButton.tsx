@@ -14,5 +14,5 @@ export function SearchButton() {
         router.push(`/propiedades/listado${currentSearchParams}`);
     };
 
-    return (<Button variant='secondary' className=" cursor-pointer" onClick={handleSearch}>Buscar</Button>)
+    return (<Button variant='outline' className=" cursor-pointer bg-secondary hover:bg-secondary/80" onClick={handleSearch}>Buscar</Button>)
 }
