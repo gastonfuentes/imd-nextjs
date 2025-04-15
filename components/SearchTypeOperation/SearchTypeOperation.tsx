@@ -15,9 +15,9 @@ export function SearchTypeOperation({ noServer, startTransition }: MultiOparatio
 
     return (
         <Tabs defaultValue={operacion.toString()} className="w-full" onValueChange={(value) => setOperacion(value)}>
-            <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value='alquilar'>Alquilar</TabsTrigger>
-                <TabsTrigger value="comprar">Comprar</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 gap-2">
+                <TabsTrigger value='alquilar' className="bg-white cursor-pointer hover:bg-amber-200 ">Alquilar</TabsTrigger>
+                <TabsTrigger value="comprar" className="bg-white cursor-pointer hover:bg-amber-200 ">Comprar</TabsTrigger>
             </TabsList>
         </Tabs>
     )
