@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, ChevronDown, Home, Phone } from "lucide-react"
+import { Menu, X, Home, Phone } from "lucide-react"
+/* import {  ChevronDown } from "lucide-react" */
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+/* import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu" */
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import Image from "next/image"
 
@@ -16,16 +17,16 @@ import Image from "next/image"
 const navigationLinks = [
     { name: "Inicio", href: "/" },
     { name: "Propiedades", href: "/propiedades/listado" },
-    {
-        name: "Servicios",
-        href: "#",
-        children: [
-            { name: "Compra", href: "/servicios/compra" },
-            { name: "Venta", href: "/servicios/venta" },
-            { name: "Alquiler", href: "/servicios/alquiler" },
-            { name: "Tasaciones", href: "/servicios/tasaciones" },
-        ],
-    },
+    /*  {
+         name: "Servicios",
+         href: "#",
+         children: [
+             { name: "Compra", href: "/servicios/compra" },
+             { name: "Venta", href: "/servicios/venta" },
+             { name: "Alquiler", href: "/servicios/alquiler" },
+             { name: "Tasaciones", href: "/servicios/tasaciones" },
+         ],
+     }, */
     { name: "Nosotros", href: "/nosotros" },
     { name: "Blog", href: "/blog" },
     { name: "Contacto", href: "/contacto" },
@@ -75,7 +76,7 @@ export default function Navbar() {
                     <nav className="hidden md:flex items-center space-x-6">
                         {navigationLinks.map((item) => {
                             // Si el elemento tiene submenú
-                            if (item.children) {
+                            /* if (item.children) {
                                 return (
                                     <DropdownMenu key={item.name}>
                                         <DropdownMenuTrigger asChild>
@@ -93,7 +94,7 @@ export default function Navbar() {
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 )
-                            }
+                            } */
 
                             // Elemento normal sin submenú
                             return (
@@ -152,7 +153,7 @@ export default function Navbar() {
                                 <nav className="flex flex-col space-y-4">
                                     {navigationLinks.map((item) => {
                                         // Si el elemento tiene submenú
-                                        if (item.children) {
+                                        /* if (item.children) {
                                             return (
                                                 <div key={item.name} className="space-y-2">
                                                     <div className="font-medium">{item.name}</div>
@@ -172,7 +173,7 @@ export default function Navbar() {
                                                     </div>
                                                 </div>
                                             )
-                                        }
+                                        } */
 
                                         // Elemento normal sin submenú
                                         return (
