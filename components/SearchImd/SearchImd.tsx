@@ -26,15 +26,15 @@ export async function SearchImd() {
 
 
     return (
-        <div className="flex-col justify-between gap-4 p-8 rounded-md flex backdrop-blur-lg shadow-accent mt-8 md:w-1/2 mx-auto">
+        <div className="flex flex-col justify-between gap-4 p-8 rounded-md  bg-primary mt-8 md:w-2/3 mx-auto ">
             <div>
                 <SearchTypeOperation noServer={true} />
             </div>
-            <div className="flex flex-col gap-4 justify-between">
+            <div className="flex flex-col md:grid md:grid-cols-3 gap-4 justify-between">
                 <SearchTypePropertySelect options={ubicaciones} placeholder="Ciudad" queryKey="ubicacion" noServer={true} />
                 <SearchTypePropertySelect options={tipos} queryKey="tipo_inmueble" noServer={true} />
+                <SearchButton />
             </div>
-            <SearchButton />
         </div>
     )
 }

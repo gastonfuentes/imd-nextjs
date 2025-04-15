@@ -18,7 +18,7 @@ export function Banner() {
             <div
                 className="h-[600px] bg-cover bg-center"
                 style={{
-                    backgroundImage: "url('/placeholder.svg?height=600&width=1200&text=Luxury+Real+Estate')",
+                    backgroundImage: "url('/banner.jpg')",
                 }}
             />
 
