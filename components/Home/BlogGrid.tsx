@@ -46,7 +46,7 @@ export const BlogGrid = () => {
             <div className="container px-4 mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
                     <div>
-                        <h2 className="text-3xl font-bold mb-2">Últimas del Blog</h2>
+                        <h2 className="text-3xl font-bold mb-2 text-primary">Últimas del Blog</h2>
                         <p className="text-muted-foreground">Consejos, tendencias y noticias del sector inmobiliario</p>
                     </div>
                     <Link href="/blog" className="inline-flex items-center mt-4 md:mt-0 text-primary hover:underline">
@@ -57,9 +57,10 @@ export const BlogGrid = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {blogPosts.map((post) => (
-                        <Card key={post.id} className="overflow-hidden">
-                            <div className="aspect-video relative">
-                                <Image src={post.image || "/placeholder.svg"} alt={post.title} className="object-cover w-full h-full" />
+                        <Card key={post.id} className="overflow-hidden pt-0 pb-0 justify-between">
+                            <div className="relative aspect-[4-3] w-full">
+                                <Image src={post.image || "/placeholder.svg"} alt={post.title} className="object-cover w-full h-full" width={400}
+                                    height={400} />
                             </div>
                             <CardHeader>
                                 <div className="flex items-center text-sm text-muted-foreground mb-2">
@@ -72,8 +73,8 @@ export const BlogGrid = () => {
                             <CardContent>
                                 <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
                             </CardContent>
-                            <CardFooter>
-                                <Link href={`/blog/${post.slug}`} className="text-primary hover:underline inline-flex items-center">
+                            <CardFooter className="bg-primary p-4">
+                                <Link href={`/blog/${post.slug}`} className="text-primary-foreground hover:underline inline-flex items-center">
                                     Leer más
                                     <ArrowRight className="ml-1 h-4 w-4" />
                                 </Link>
