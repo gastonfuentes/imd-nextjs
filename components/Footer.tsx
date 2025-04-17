@@ -1,8 +1,9 @@
 import Link from "next/link"
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, ArrowRight, Home } from "lucide-react"
+import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin, ArrowRight } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image"
 
 export default function Footer() {
     return (
@@ -12,8 +13,9 @@ export default function Footer() {
                     {/* Company Info */}
                     <div className="space-y-4">
                         <div className="flex items-center gap-2">
-                            <Home className="h-6 w-6" />
-                            <span className="text-xl font-bold">InmobiliariaXYZ</span>
+                            {/*  <Home className="h-6 w-6" />
+                            <span className="text-xl font-bold">InmobiliariaXYZ</span> */}
+                            <Image src="/secundario-fondo-oscuro.svg" alt="Logo" width={150} height={56} className="h-16 w-auto" />
                         </div>
                         <p className="text-slate-400">
                             Ofrecemos las mejores propiedades en el mercado con un servicio personalizado y profesional.
