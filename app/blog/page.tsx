@@ -18,6 +18,7 @@ import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 
 import placeholder from "@/app/images/image.png"
+import { fetchPosts } from "@/lib/fetch-posts"
 
 // Datos de ejemplo para las entradas del blog
 const blogPosts = [
@@ -127,6 +128,11 @@ const featuredPosts = [
     },
 ]
 
+
+const posts = await fetchPosts()
+
+
+
 export default function BlogPage() {
     return (
         <div className="container mx-auto px-4 py-8">
@@ -152,7 +158,7 @@ export default function BlogPage() {
                         </TabsList>
                         <TabsContent value="all">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                {blogPosts.map((post) => (
+                                {posts.map((post) => (
                                     <Card key={post.id} className="overflow-hidden">
                                         <div className="aspect-video relative">
                                             <Image
@@ -162,7 +168,7 @@ export default function BlogPage() {
                                                 width={500}
                                                 height={300}
                                             />
-                                            <Badge className="absolute top-3 left-3 bg-primary/90">{post.category}</Badge>
+                                            <Badge className="absolute top-3 left-3 bg-primary/90">{post.categories}</Badge>
                                         </div>
                                         <CardHeader className="p-4 pb-0">
                                             <div className="flex items-center text-sm text-muted-foreground mb-2">
