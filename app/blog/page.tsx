@@ -252,6 +252,7 @@ export default function BlogPage() {
                                                     width={500}
                                                     height={300}
                                                 />
+
                                                 <Badge className="absolute top-3 left-3 bg-primary/90">{post.category}</Badge>
                                             </div>
                                             <CardHeader className="p-4 pb-0">

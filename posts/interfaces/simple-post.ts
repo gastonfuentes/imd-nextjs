@@ -6,7 +6,7 @@ export interface SimplePost {
     slug: string;
     image: string;
     date?: string;
-    author: number;
-    categories: number[];
-    tags: number[];
+    author: string;
+    categories: string[];
+    tags: string[];
 }
