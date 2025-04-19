@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
         pathname: '/wp-content/uploads/**',
         search: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'bisque-giraffe-421578.hostingersite.com',
+        port: '',
+        pathname: '**',
+        search: '',
+      },
     ],
   },
 
