@@ -36,7 +36,7 @@ export const PostsGrid = ({ posts }: { posts: SimplePost[] }) => {
                         </Link>
                     </CardHeader>
                     <CardContent className="p-4 pt-2">
-                        <p className="prose">{parse(post.excerpt)}</p>
+                        <p className=" text-gray-600">{parse(post.excerpt)}</p>
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
                         {post.tags.map((tag) => (
