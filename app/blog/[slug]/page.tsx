@@ -106,7 +106,7 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                             </div>
 
                             {/* Post Content */}
-                            <div className="prose prose-img:rounded-xl prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:pl-4 prose-blockquote:text-gray-600 prose-headings:scroll-mt-24 prose-a:text-blue-600">
+                            <div className="prose max-w-none prose-img:rounded-xl prose-img:shadow-md prose-blockquote:border-l-4 prose-blockquote:pl-4 prose-blockquote:text-gray-600 prose-headings:scroll-mt-24 prose-a:text-blue-600">
                                 {parse(content)}
                             </div>
 
