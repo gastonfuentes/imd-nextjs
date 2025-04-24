@@ -22,13 +22,14 @@ import { fetchCategories } from "@/lib/fetch-categories"
 import { CategoriesCard } from "@/posts/components/CategoriesCard"
 
 
-// Artículos destacados
-const featuredPosts = await fetchFeaturedPosts()
-const posts = await fetchPosts()
-const categorias = await fetchCategories()
 
 
-export default function BlogPage() {
+export default async function BlogPage() {
+
+    const featuredPosts = await fetchFeaturedPosts()
+    const posts = await fetchPosts()
+    const categorias = await fetchCategories()
+
     return (
         <div className="container mx-auto px-4 py-8">
             {/* Hero Section */}

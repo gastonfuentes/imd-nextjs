@@ -14,14 +14,9 @@ export interface PostsResponse {
     excerpt: Content;
     author: number;
     featured_media: number;
-    comment_status: string;
-    ping_status: string;
-    sticky: boolean;
     template: string;
-    format: string;
-    meta: Meta;
     categories: number[];
-    tags: [];
+    tags: number[];
     class_list: string[];
     acf: [];
     _links: PostsResponseLinks;
@@ -91,11 +86,11 @@ export interface WpFeaturedmediaLinks {
     self: Self[];
     collection: About[];
     about: About[];
-    author: ReplyElement[];
-    replies: ReplyElement[];
+    author: WpFeaturedmediaElement[];
+    replies: WpFeaturedmediaElement[];
 }
 
-export interface ReplyElement {
+export interface WpFeaturedmediaElement {
     embeddable: boolean;
     href: string;
 }
@@ -153,8 +148,8 @@ export interface EmbeddedWpTerm {
     link: string;
     name: string;
     slug: string;
-    taxonomy: string;
-    acf: [];
+    taxonomy: Taxonomy;
+    acf?: [];
     _links: WpTermLinks;
 }
 
@@ -180,32 +175,24 @@ export enum Name {
     Wp = "wp",
 }
 
+export enum Taxonomy {
+    Category = "category",
+    PostTag = "post_tag",
+}
+
 export interface PostsResponseLinks {
     self: Self[];
     collection: About[];
     about: About[];
-    author: ReplyElement[];
-    replies: ReplyElement[];
-    "version-history": VersionHistory[];
-    "predecessor-version": PredecessorVersion[];
-    "wp:featuredmedia": ReplyElement[];
+    author: WpFeaturedmediaElement[];
+    "wp:featuredmedia": WpFeaturedmediaElement[];
     "wp:attachment": About[];
     "wp:term": LinksWpTerm[];
     curies: Cury[];
 }
 
-export interface PredecessorVersion {
-    id: number;
-    href: string;
-}
-
-export interface VersionHistory {
-    count: number;
-    href: string;
-}
-
 export interface LinksWpTerm {
-    taxonomy: string;
+    taxonomy: Taxonomy;
     embeddable: boolean;
     href: string;
 }
@@ -215,8 +202,5 @@ export interface Content {
     protected: boolean;
 }
 
-export interface Meta {
-    _acf_changed: boolean;
-    footnotes: string;
-}
+
 

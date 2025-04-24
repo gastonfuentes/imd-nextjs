@@ -14,7 +14,7 @@ const formatDate = (dateString: Date): string => {
 export const fetchPosts = async (): Promise<SimplePost[]> => {
     try {
 
-        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/posts/?_embed", { next: { revalidate: 60 } });
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas/?_embed", { next: { revalidate: 60 } });
         if (!res.ok) {
             throw new Error("Error al obtener los posts");
         }
@@ -47,7 +47,7 @@ export const fetchPosts = async (): Promise<SimplePost[]> => {
 export const fetchAllSlugsPosts = async (): Promise<SimpleSlug[]> => {
     try {
 
-        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/posts?_fields=slug");
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?_fields=slug");
         if (!res.ok) {
             throw new Error("Error al obtener los posts");
         }
@@ -67,7 +67,7 @@ export const fetchAllSlugsPosts = async (): Promise<SimpleSlug[]> => {
 // Función para obtener una post por su slug
 export const fetchPostyBySlug = async (slug: string): Promise<SimplePost> => {
     try {
-        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/posts?slug=${slug}&_embed`, { next: { revalidate: 60 } });
+        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?slug=${slug}&_embed`, { next: { revalidate: 60 } });
         if (!res.ok) {
             throw new Error(`Error al obtener el post con slug: ${slug}`);
         }
@@ -99,11 +99,11 @@ export const fetchPostyBySlug = async (slug: string): Promise<SimplePost> => {
 };
 
 
-// Función para obtener todas las propiedades con datos completos
+// Función para obtener los posts destacados
 export const fetchFeaturedPosts = async (): Promise<SimplePost[]> => {
     try {
 
-        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/posts?sticky=true&_embed");
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?categories=1&_embed");
         if (!res.ok) {
             throw new Error("Error al obtener los posts");
         }
@@ -149,7 +149,7 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
         const categoryId = categoryData[0].id; // Obtener el ID de la categoría
 
         // Obtener los posts de la categoría específica
-        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/posts?categories=${categoryId}&_embed`, { next: { revalidate: 60 } });
+        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?categories=${categoryId}&_embed`, { next: { revalidate: 60 } });
         if (!res.ok) {
             throw new Error(`Error al obtener los posts de la categoría con ID: ${categoryId}`);
         }
@@ -170,6 +170,37 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
         }));
     } catch (error) {
         console.error("Error en fetchPostsByCategory:", error);
+        return []; // Devuelve un array vacío en caso de error
+    }
+};
+
+
+// Función para obtener todos los posts con datos completos
+export const fetchLatestPosts = async (): Promise<SimplePost[]> => {
+    try {
+
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas/?_embed", { next: { revalidate: 60 } });
+        if (!res.ok) {
+            throw new Error("Error al obtener los posts");
+        }
+
+        const data: PostsResponse[] = await res.json();
+
+        return data.map((post) => ({
+            id: post.id,
+            title: post.title.rendered,
+            excerpt: post.excerpt.rendered,
+            content: post.content.rendered,
+            slug: post.slug,
+            author: post._embedded.author[0].name,
+            categories: post._embedded['wp:term'][0].map((cat) => cat.name),
+            tags: post._embedded['wp:term'][1].map((tag) => tag.name),
+            image: post._embedded['wp:featuredmedia'][0].link,
+            date: formatDate(post.date), // Formatear la fecha
+        }));
+
+    } catch (error) {
+        console.error("Error en fetchposts:", error);
         return []; // Devuelve un array vacío en caso de error
     }
 };

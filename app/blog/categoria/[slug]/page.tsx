@@ -27,6 +27,7 @@ import { SimpleCategory } from '../../../../posts/interfaces/simple-category';
 const featuredPosts = await fetchFeaturedPosts()
 /* const posts = await fetchPosts() */
 const categorias = await fetchCategories()
+console.log("categorias", categorias);
 
 
 //SOLOS SE EJECUTA EN BUILDTIME
@@ -40,6 +41,7 @@ export async function generateStaticParams() {
             console.warn('No se encontraron los slugs para generar los parámetros estáticos.');
             return [];
         }
+
 
         return data.map((slug) => ({
             slug: slug.slug,
@@ -74,6 +76,9 @@ export async function generateStaticParams() {
 export default async function CategoryPage({ params, }: { params: Promise<{ slug: string }>; }) {
 
     const { slug } = await params;
+
+    console.log("slug", slug);
+
 
     try {
 

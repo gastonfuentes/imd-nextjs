@@ -21,7 +21,12 @@ export const PostsGrid = ({ posts }: { posts: SimplePost[] }) => {
                             width={500}
                             height={300}
                         />
-                        <Badge className="absolute top-3 left-3 bg-primary/90">{post.categories}</Badge>
+                        <div className="absolute top-3 left-3 flex gap-1">
+                            {post.categories.map((cat, i) => (
+                                <Badge key={i} className={cat.includes("*Destacado") ? "bg-secondary text-gray-800" : "bg-primary/90"}>{cat}</Badge>
+
+                            ))}
+                        </div>
                     </div>
                     <CardHeader className="p-4 pb-0">
                         <div className="flex items-center text-sm text-muted-foreground mb-2">
@@ -36,7 +41,7 @@ export const PostsGrid = ({ posts }: { posts: SimplePost[] }) => {
                         </Link>
                     </CardHeader>
                     <CardContent className="p-4 pt-2">
-                        <p className=" prose ">{parse(post.excerpt)}</p>
+                        {parse(post.excerpt)}
                     </CardContent>
                     <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
                         {post.tags.map((tag) => (
