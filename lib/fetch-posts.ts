@@ -175,11 +175,12 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
 };
 
 
-// Función para obtener todos los posts con datos completos
+// Función para obtener los últimos posts (3 posts)
+// Esta función se utiliza para mostrar los últimos posts en la página de inicio o en otras secciones
 export const fetchLatestPosts = async (): Promise<SimplePost[]> => {
     try {
 
-        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas/?_embed", { next: { revalidate: 60 } });
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas/?per_page=3&_embed");
         if (!res.ok) {
             throw new Error("Error al obtener los posts");
         }
