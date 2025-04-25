@@ -5,8 +5,8 @@ import "./globals.css";
 
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import { Suspense } from "react";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/NavBar";
+/* import Footer from "@/components/Footer";
+import Navbar from "@/components/NavBar"; */
 
 
 const geistSans = Geist({
@@ -32,6 +32,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
+
+
   return (
     <html lang="es">
       <body
@@ -40,11 +44,13 @@ export default function RootLayout({
         <Suspense >
           <NuqsAdapter>
 
-            <Navbar />
+            {/*  <Navbar /> */}
 
 
             {children}
-            <Footer />
+
+
+            {/*  <Footer /> */}
 
 
 
