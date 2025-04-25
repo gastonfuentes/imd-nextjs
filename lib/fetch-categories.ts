@@ -1,6 +1,8 @@
 import { CategoriesResponse, SimpleCategory } from "@/posts";
 
+
 // Función para obtener todas las categorias de los posts menos la categoria destacada
+// Esta función se utiliza para mostrar las categorias en el sidebar de la pagina de blog
 export const fetchCategories = async (): Promise<SimpleCategory[]> => {
     try {
 

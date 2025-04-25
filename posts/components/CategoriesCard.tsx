@@ -9,6 +9,7 @@ export const CategoriesCard = ({ categorias }: { categorias: SimpleCategory[] })
         <Card>
             <CardHeader className="pb-2">
                 <h3 className="text-lg font-semibold">Categorías</h3>
+                <p className="text-sm">Todos los posts ordenados por categoria:</p>
             </CardHeader>
             <CardContent className="p-4 pt-0">
                 <ul className="space-y-2">

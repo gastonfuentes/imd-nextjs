@@ -1,9 +1,3 @@
-import Link from "next/link"
-
-
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, /* CardFooter */ CardHeader } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 
 import {
     Pagination,
@@ -13,13 +7,15 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination"
-import { Separator } from "@/components/ui/separator"
+
 
 
 import { fetchFeaturedPosts, fetchPosts } from "@/lib/fetch-posts"
 import { PostsGrid } from "@/posts/components/PostsGrid"
 import { fetchCategories } from "@/lib/fetch-categories"
 import { CategoriesCard } from "@/posts/components/CategoriesCard"
+import { FeaturedPostsCard } from "@/posts/components/FeaturedPostsCard"
+import { CallToAction } from "@/posts/components/CallToAction"
 
 
 
@@ -221,35 +217,10 @@ export default async function BlogPage() {
                     <CategoriesCard categorias={categorias} />
 
                     {/* Featured Posts */}
-                    <Card>
-                        <CardHeader className="pb-2">
-                            <h3 className="text-lg font-semibold">Artículos Destacados</h3>
-                        </CardHeader>
-                        <CardContent className="p-4 pt-0">
-                            <ul className="space-y-4">
-                                {featuredPosts.map((post) => (
-                                    <li key={post.id}>
-                                        <Link href={`/blog/${post.slug}`} className="block group">
-                                            <h4 className="font-medium group-hover:text-primary transition-colors">{post.title}</h4>
-                                            <p className="text-sm text-muted-foreground">{post.date}</p>
-                                        </Link>
-                                        {post.id !== featuredPosts[featuredPosts.length - 1].id && <Separator className="mt-4" />}
-                                    </li>
-                                ))}
-                            </ul>
-                        </CardContent>
-                        {/*  <CardFooter className="p-4 pt-0">
-                            <Button variant="outline" className="w-full" asChild>
-                                <Link href="/blog/destacados">
-                                    Ver todos los destacados
-                                    <ArrowRight className="ml-2 h-4 w-4" />
-                                </Link>
-                            </Button>
-                        </CardFooter> */}
-                    </Card>
+                    <FeaturedPostsCard featuredPosts={featuredPosts} />
 
                     {/* Newsletter */}
-                    <Card className="bg-primary text-primary-foreground">
+                    {/* <Card className="bg-primary text-primary-foreground">
                         <CardHeader className="pb-2">
                             <h3 className="text-lg font-semibold">Suscríbete a nuestro newsletter</h3>
                         </CardHeader>
@@ -266,7 +237,10 @@ export default async function BlogPage() {
                                 Suscribirse
                             </Button>
                         </CardContent>
-                    </Card>
+                    </Card> */}
+
+                    {/* Call to Action */}
+                    <CallToAction />
                 </div>
             </div>
         </div>
