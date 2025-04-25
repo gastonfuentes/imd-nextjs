@@ -1,10 +1,33 @@
+import { Banner } from "@/components/Banner";
+import { BlogGrid, CallToAction, PorQueElegirnos, TestimoniosGrid } from "@/components/Home";
+import { redirect } from 'next/navigation'
+
+/* import { fetchProperties } from '../lib/fetch-properties'; */
+/* import { InmueblesGrid } from "../inmuebles"; */
 
 
-export default function Home() {
+export default async function Home() {
+
+  /*   const inmuebles = await fetchProperties(); */
+
+  redirect('/construccion')
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h1>desde el page</h1>
+    <div className="">
+      <main className="">
+        <Banner />
+        {/* <InmueblesGrid inmuebles={inmuebles} /> */}
+
+        <PorQueElegirnos />
+
+        {/* Blog Section */}
+        <BlogGrid />
+
+        {/* Testimonials Section */}
+        <TestimoniosGrid />
+
+        {/* CTA Section */}
+        <CallToAction />
       </main>
     </div>
   );
