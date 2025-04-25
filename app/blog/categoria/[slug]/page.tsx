@@ -1,9 +1,7 @@
 import Link from "next/link"
 
 
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, /* CardFooter */ CardHeader } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 
 import {
     Pagination,
@@ -21,13 +19,9 @@ import { PostsGrid } from "@/posts/components/PostsGrid"
 import { fetchCategories } from "@/lib/fetch-categories"
 import { CategoriesCard } from "@/posts/components/CategoriesCard"
 import { SimpleCategory } from '../../../../posts/interfaces/simple-category';
+import { CallToAction } from "@/posts/components/CallToAction"
 
 
-// Artículos destacados
-const featuredPosts = await fetchFeaturedPosts()
-/* const posts = await fetchPosts() */
-const categorias = await fetchCategories()
-console.log("categorias", categorias);
 
 
 //SOLOS SE EJECUTA EN BUILDTIME
@@ -82,7 +76,15 @@ export default async function CategoryPage({ params, }: { params: Promise<{ slug
 
     try {
 
+
+        // Artículos destacados
+        const featuredPosts = await fetchFeaturedPosts()
+        /* const posts = await fetchPosts() */
+        const categorias = await fetchCategories()
+        /* console.log("categorias", categorias); */
+
         const posts = await fetchPostsByCategory(slug);
+
 
         if (!posts) {
             return <div>No se encontró el post.</div>;
@@ -307,7 +309,7 @@ export default async function CategoryPage({ params, }: { params: Promise<{ slug
                         </Card>
 
                         {/* Newsletter */}
-                        <Card className="bg-primary text-primary-foreground">
+                        {/*  <Card className="bg-primary text-primary-foreground">
                             <CardHeader className="pb-2">
                                 <h3 className="text-lg font-semibold">Suscríbete a nuestro newsletter</h3>
                             </CardHeader>
@@ -324,7 +326,10 @@ export default async function CategoryPage({ params, }: { params: Promise<{ slug
                                     Suscribirse
                                 </Button>
                             </CardContent>
-                        </Card>
+                        </Card> */}
+
+                        {/* Call to Action */}
+                        <CallToAction />
                     </div>
                 </div>
             </div>

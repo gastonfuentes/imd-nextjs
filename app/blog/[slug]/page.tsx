@@ -2,15 +2,18 @@ import Link from "next/link"
 import { ArrowLeft, Calendar, User, Facebook, Twitter, Linkedin, Mail } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { fetchAllSlugsPosts, fetchPostyBySlug } from "@/lib/fetch-posts"
+import { fetchAllSlugsPosts, fetchFeaturedPosts, fetchPostyBySlug } from "@/lib/fetch-posts"
 import { SimpleSlug } from '../../../posts/interfaces/simple-slug';
-import { SimplePost } from "@/posts"
+import { SimpleCategory, SimplePost } from "@/posts"
 import Image from "next/image"
 
 import parse from 'html-react-parser'
+import { fetchCategories } from "@/lib/fetch-categories"
+import { CategoriesCard } from "@/posts/components/CategoriesCard"
+import { FeaturedPostsCard } from "@/posts/components/FeaturedPostsCard"
+import { CallToAction } from "@/posts/components/CallToAction"
 
 
 
@@ -66,6 +69,8 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
     try {
 
         const post: SimplePost = await fetchPostyBySlug(slug);
+        const categorias: SimpleCategory[] = await fetchCategories();
+        const featuredPosts: SimplePost[] = await fetchFeaturedPosts();
 
         if (!post) {
             return <div>No se encontró el post.</div>;
@@ -87,6 +92,7 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                     {/* Main Content */}
                     <div className="lg:col-span-2">
                         <article>
+                            <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
                             {/* Featured Image */}
                             <div className="rounded-lg overflow-hidden mb-6">
                                 <Image src={image || "/placeholder.svg"} alt={post.title} className="w-full h-auto" width={400} height={400} />
@@ -94,8 +100,10 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
 
                             {/* Post Header */}
                             <div className="mb-8">
-                                <Badge className="mb-4">{categories}</Badge>
-                                <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1>
+                                {categories.map((cate, i) => (
+                                    <Badge key={i} className={cate.includes("*Destacado") ? "bg-secondary text-gray-800 mr-2 mb-2" : "bg-primary/90 mr-2 mb-2"}>{cate}</Badge>
+                                ))}
+                                {/*   <h1 className="text-3xl md:text-4xl font-bold mb-4">{title}</h1> */}
                                 <div className="flex items-center text-sm text-muted-foreground">
                                     <Calendar className="h-4 w-4 mr-1" />
                                     <span>{date}</span>
@@ -190,7 +198,7 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                   </Card> */}
 
                         {/* Popular Tags */}
-                        <Card>
+                        {/* <Card>
                             <CardHeader className="pb-2">
                                 <h3 className="text-lg font-semibold">Etiquetas Populares</h3>
                             </CardHeader>
@@ -206,10 +214,10 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                                     <Badge variant="outline">Mercado</Badge>
                                 </div>
                             </CardContent>
-                        </Card>
+                        </Card> */}
 
                         {/* Newsletter */}
-                        <Card className="bg-primary text-primary-foreground">
+                        {/*  <Card className="bg-primary text-primary-foreground">
                             <CardHeader className="pb-2">
                                 <h3 className="text-lg font-semibold">Suscríbete a nuestro newsletter</h3>
                             </CardHeader>
@@ -221,20 +229,15 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                                     Suscribirse
                                 </Button>
                             </CardContent>
-                        </Card>
+                        </Card> */}
+
+                        {/* Categorías */}
+                        <CategoriesCard categorias={categorias} />
+
+                        <FeaturedPostsCard featuredPosts={featuredPosts} />
 
                         {/* CTA */}
-                        <Card>
-                            <CardContent className="p-6">
-                                <h3 className="text-lg font-semibold mb-2">¿Buscando una propiedad?</h3>
-                                <p className="text-muted-foreground mb-4">
-                                    Nuestros asesores inmobiliarios están listos para ayudarte a encontrar tu hogar ideal.
-                                </p>
-                                <Button className="w-full" asChild>
-                                    <Link href="/contacto">Contactar un asesor</Link>
-                                </Button>
-                            </CardContent>
-                        </Card>
+                        <CallToAction />
                     </div>
                 </div>
             </div>

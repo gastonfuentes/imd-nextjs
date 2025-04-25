@@ -67,7 +67,7 @@ export const fetchAllSlugsPosts = async (): Promise<SimpleSlug[]> => {
 // Función para obtener una post por su slug
 export const fetchPostyBySlug = async (slug: string): Promise<SimplePost> => {
     try {
-        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?slug=${slug}&_embed`, { next: { revalidate: 60 } });
+        const res = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?slug=${slug}&_embed`);
         if (!res.ok) {
             throw new Error(`Error al obtener el post con slug: ${slug}`);
         }
@@ -103,7 +103,7 @@ export const fetchPostyBySlug = async (slug: string): Promise<SimplePost> => {
 export const fetchFeaturedPosts = async (): Promise<SimplePost[]> => {
     try {
 
-        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?categories=1&_embed");
+        const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas?categories=1&_embed", { next: { revalidate: 60 } });
         if (!res.ok) {
             throw new Error("Error al obtener los posts");
         }
