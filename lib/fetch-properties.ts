@@ -40,6 +40,23 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
             tipo_operacion: inmueble.tipo_operacion?.[0]?.toString(),
             ciudad: inmueble.ciudades?.[0]?.toString(),
             ciudad_nombre: ubicacionesMap[inmueble.ciudades?.[0]?.toString()] || "Desconocido",
+            destacado: inmueble.acf.destacado || false,
+            banios: inmueble.acf.banios || undefined,
+            maps: inmueble.acf.google_maps || {
+                address: "",
+                lat: 0,
+                lng: 0,
+                zoom: 0,
+                place_id: "",
+                street_number: "",
+                street_name: "",
+                street_name_short: "",
+                city: "",
+                post_code: "",
+                country: "",
+                state: "",
+                country_short: "",
+            }
         }));
     } catch (error) {
         console.error("Error en fetchProperties:", error);
@@ -123,6 +140,23 @@ export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble>
             ciudad: inmuebleData.ciudades?.[0]?.toString() || "Desconocido",
             ciudad_nombre: "Desconocido",
             tipo_inmueble_nombre: "Desconocido",
+            destacado: inmuebleData.acf.destacado || false,
+            banios: inmuebleData.acf.banios || undefined,
+            maps: inmuebleData.acf.google_maps || {
+                address: "",
+                lat: 0,
+                lng: 0,
+                zoom: 0,
+                place_id: "",
+                street_number: "",
+                street_name: "",
+                street_name_short: "",
+                city: "",
+                post_code: "",
+                country: "",
+                state: "",
+                country_short: "",
+            }
         };
     } catch (error) {
         console.error("Error en fetchPropertyBySlug:", error);
@@ -160,6 +194,23 @@ export const fetchPropertiesSimple = async (): Promise<SimpleInmueble[]> => {
             tipo_operacion: inmueble.tipo_operacion?.[0]?.toString(),
             ciudad: inmueble.ciudades?.[0]?.toString(),
             ciudad_nombre: "Desconocido",
+            destacado: inmueble.acf.destacado || false,
+            banios: inmueble.acf.banios || undefined,
+            maps: inmueble.acf.google_maps || {
+                address: "",
+                lat: 0,
+                lng: 0,
+                zoom: 0,
+                place_id: "",
+                street_number: "",
+                street_name: "",
+                street_name_short: "",
+                city: "",
+                post_code: "",
+                country: "",
+                state: "",
+                country_short: "",
+            }
         }));
     } catch (error) {
         console.error("Error en fetchPropertiesSimple:", error);

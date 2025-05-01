@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import PropertyContactForm from '@/components/PropertyContactForm';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { GoogleMapsCard } from '@/components/GoogleMaps';
 
 
 
@@ -97,6 +98,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
             id,
             tipo_inmueble_nombre,
             ciudad_nombre,
+            maps,
         } = inmueble;
 
         return (
@@ -237,14 +239,11 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                         </Card>
 
                         {/* Location Map (placeholder) */}
-                        <Card>
-                            <CardContent className="p-6">
-                                <h2 className="text-xl font-semibold mb-4">Ubicación</h2>
-                                <div className="aspect-video bg-muted rounded-md flex items-center justify-center">
-                                    <p className="text-muted-foreground">Mapa de ubicación</p>
-                                </div>
-                            </CardContent>
-                        </Card>
+                        <GoogleMapsCard maps={maps} />
+
+                        {/* Additional Information */}
+
+
                     </div>
 
                     {/* Contact Form */}
