@@ -1,3 +1,5 @@
+import { GoogleMaps } from "./inmuebles-response";
+
 export interface SimpleInmueble {
     id: number;
     title: string;
@@ -18,4 +20,7 @@ export interface SimpleInmueble {
     ciudad: string;
     ciudad_nombre: string;
     tipo_inmueble_nombre: string;
+    destacado: boolean;
+    maps: GoogleMaps;
+    banios: string | undefined;
 }

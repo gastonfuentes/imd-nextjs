@@ -85,6 +85,26 @@ export interface Acf {
     cochera: string;
     plantas: string;
     banios?: string;
+    google_maps?: GoogleMaps;
+    destacado: boolean;
+}
+
+export interface GoogleMaps {
+    address: string;
+    lat: number;
+    lng: number;
+    zoom: number;
+    place_id: string;
+    street_number: string;
+    street_name: string;
+    street_name_short?: string;
+    city: string;
+    state: string;
+    post_code: string;
+    country: string;
+    country_short: string;
+    name?: string;
+    state_short?: string;
 }
 
 export interface Content {
