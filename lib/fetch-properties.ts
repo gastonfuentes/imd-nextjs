@@ -220,3 +220,5 @@ export const fetchPropertiesSimple = async (): Promise<SimpleInmueble[]> => {
 
 
 
+
+
