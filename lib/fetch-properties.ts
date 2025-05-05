@@ -65,42 +65,106 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
 };
 
 // Función para filtrar propiedades según un query
-export const fetchFilteredProperties = async (query: Record<string, string | string[]>): Promise<SimpleInmueble[]> => {
+export const fetchFilteredProperties = async (
+    query: Record<string, string | string[]>, // Filtros
+    page: number = 1, // Página actual
+    perPage: number = 10 // Propiedades por página
+): Promise<{ properties: SimpleInmueble[]; totalPages: number }> => {
     try {
-        const inmuebles = await fetchProperties();
+        // Construir la URL con los filtros y la paginación
+        const params = new URLSearchParams();
 
-        const filteredInmuebles = inmuebles.filter((inmueble) => {
-            // Filtrar por operación
-            if (query.tipo_operacion === "comprar" && inmueble.tipo_operacion !== "7") {
-                return false;
-            }
-            if (query.tipo_operacion === "alquilar" && inmueble.tipo_operacion !== "8") {
-                return false;
-            }
+        // Agregar filtros dinámicamente
+        if (query.tipo_operacion) {
+            const tipoOperacion = Array.isArray(query.tipo_operacion)
+                ? query.tipo_operacion.join(",") // Combina los valores del array en una cadena separada por comas
+                : query.tipo_operacion; // Si es un string, úsalo directamente
 
-            // Filtrar por ubicaciones
-            if (query.ubicacion) {
-                const ubicaciones = Array.isArray(query.ubicacion) ? query.ubicacion : [query.ubicacion];
-                if (!ubicaciones.map((u) => u.toLowerCase()).includes(inmueble.ciudad_nombre.toLowerCase())) {
-                    return false;
-                }
-            }
+            params.append("tipo_operacion", tipoOperacion); // Agrega el filtro a los parámetros
+        }
 
-            // Filtrar por tipos de inmuebles
-            if (query.tipo_inmueble) {
-                const tiposInmuebles = Array.isArray(query.tipo_inmueble) ? query.tipo_inmueble : [query.tipo_inmueble];
-                if (!tiposInmuebles.map((t) => t.toLowerCase()).includes(inmueble.tipo_inmueble_nombre.toLowerCase())) {
-                    return false;
-                }
-            }
+        if (query.ubicacion) {
+            const ubicacion = Array.isArray(query.ubicacion)
+                ? query.ubicacion.join(",")
+                : query.ubicacion;
 
-            return true;
-        });
+            params.append("ubicacion", ubicacion);
+        }
 
-        return filteredInmuebles;
+        if (query.tipo_inmueble) {
+            const tipoInmueble = Array.isArray(query.tipo_inmueble)
+                ? query.tipo_inmueble.join(",")
+                : query.tipo_inmueble;
+
+            params.append("tipo_inmueble", tipoInmueble);
+        }
+
+        // Agregar parámetros de paginación
+        params.append("page", page.toString());
+        params.append("per_page", perPage.toString());
+
+        console.log("params", params.toString()); // Imprimir los parámetros de búsqueda en la consola
+
+
+        // Llamar a la API de WordPress con los filtros y la paginación
+        const res = await fetch(
+            `https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/inmuebles?${params.toString()}`
+        );
+
+        if (!res.ok) {
+            throw new Error("Error al obtener las propiedades filtradas");
+        }
+
+        // Obtener el total de páginas desde los encabezados de la API
+        const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+
+        // Procesar los datos de la respuesta
+        const data: InmueblesResponse[] = await res.json();
+
+        // Mapear los datos a SimpleInmueble
+        const properties = data.map((inmueble) => ({
+            id: inmueble.id,
+            title: inmueble.title.rendered,
+            images: extractImagesFromContent(inmueble.content.rendered),
+            descripcion: inmueble.acf.descripcion,
+            direccion: inmueble.acf.direccion,
+            precio: inmueble.acf.precio,
+            superficie_construida_total: inmueble.acf.superficie_construida_total,
+            superficie_del_terreno: inmueble.acf.superficie_del_terreno,
+            superficie_cubierta_total: inmueble.acf.superficie_cubierta_total,
+            quincho: inmueble.acf.quincho,
+            dormitorios: inmueble.acf.dormitorios,
+            cochera: inmueble.acf.cochera,
+            plantas: inmueble.acf.plantas,
+            slug: inmueble.slug,
+            tipo_inmueble: inmueble.tipo_inmueble?.[0]?.toString() || "Desconocido",
+            tipo_operacion: inmueble.tipo_operacion?.[0]?.toString(),
+            ciudad: inmueble.ciudades?.[0]?.toString(),
+            ciudad_nombre: "Desconocido", // Puedes mapearlo si tienes un mapa de ubicaciones
+            tipo_inmueble_nombre: "Desconocido", // Puedes mapearlo si tienes un mapa de tipos
+            destacado: inmueble.acf.destacado || false,
+            banios: inmueble.acf.banios || undefined,
+            maps: inmueble.acf.google_maps || {
+                address: "",
+                lat: 0,
+                lng: 0,
+                zoom: 0,
+                place_id: "",
+                street_number: "",
+                street_name: "",
+                street_name_short: "",
+                city: "",
+                post_code: "",
+                country: "",
+                state: "",
+                country_short: "",
+            },
+        }));
+
+        return { properties, totalPages }; // Devuelve las propiedades y el total de páginas
     } catch (error) {
         console.error("Error en fetchFilteredProperties:", error);
-        return []; // Devuelve un array vacío en caso de error
+        return { properties: [], totalPages: 1 }; // Devuelve un array vacío en caso de error
     }
 };
 

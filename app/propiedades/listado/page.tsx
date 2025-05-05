@@ -32,7 +32,10 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
 
 
     const query = querySchema.parse(searchParamas); // Validar los parámetros de búsqueda
-    const propiedadesFiltradas = await fetchFilteredProperties(query); // Filtrar las propiedades según los parámetros de búsqueda
+    const { properties, totalPages } = await fetchFilteredProperties(query); // Filtrar las propiedades según los parámetros de búsqueda
+
+    console.log("totalPages", totalPages); // Imprimir el número total de páginas en la consola
+
 
 
     // Obtener los tipos de inmuebles y formatearlos al tipo Option
@@ -52,7 +55,7 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
     return (
         <div className="w-5/6 mx-auto mt-8 p-4 rounded-md shadow-md bg-white">
 
-            <PropertyGrid propiedades={propiedadesFiltradas} tipos={tipos} ubicaciones={ubicaciones} />
+            <PropertyGrid propiedades={properties} tipos={tipos} ubicaciones={ubicaciones} />
 
         </div >
     )
