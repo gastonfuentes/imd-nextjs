@@ -19,7 +19,7 @@ export const fetchUbicaciones = async (): Promise<SimpleUbicacion[]> => {
 
 
 // Obtener el mapa de ubicaciones (ID -> Slug)
-export const fetchUbicacionesMap = async (): Promise<Record<string, string>> => {
+/* export const fetchUbicacionesMap = async (): Promise<Record<string, string>> => {
     const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/ciudades")
         .then((res) => res.json());
 
@@ -27,6 +27,28 @@ export const fetchUbicacionesMap = async (): Promise<Record<string, string>> => 
     res.forEach((ubicacion: { id: number; slug: string }) => {
         ubicacionesMap[ubicacion.id.toString()] = ubicacion.slug;
     });
+
+    console.log("Ubicaciones Map:", ubicacionesMap); // Debugging line to check the map
+
+
+    return ubicacionesMap;
+}; */
+
+interface Ubicacion {
+    id: number;
+    name: string;
+    slug: string;
+}
+
+export const fetchUbicacionesMap = async (): Promise<Record<string, string>> => {
+    const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/ciudades");
+    const data: Ubicacion[] = await res.json();
+
+    // Construir el mapa con el nombre como clave y el ID como valor
+    const ubicacionesMap = data.reduce((acc, ubicacion) => {
+        acc[ubicacion.slug] = ubicacion.id.toString(); // Usar el slug como clave y el ID como valor
+        return acc;
+    }, {} as Record<string, string>);
 
     return ubicacionesMap;
 };

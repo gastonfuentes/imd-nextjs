@@ -2,6 +2,7 @@ import { InmueblesResponse } from '../inmuebles/interfaces/inmuebles-response';
 import { SimpleInmueble } from '../inmuebles/interfaces/simple-inmueble';
 import { extractImagesFromContent } from './extract-images';
 import { fetchTiposInmueblesMap } from './fetch-tipo-inmuebles';
+import { fetchTiposOperacionMap } from './fetch-tipo-operacion';
 import { fetchUbicacionesMap } from './fetch-ubicaciones';
 
 // Función para obtener todas las propiedades con datos completos
@@ -71,32 +72,53 @@ export const fetchFilteredProperties = async (
     perPage: number = 10 // Propiedades por página
 ): Promise<{ properties: SimpleInmueble[]; totalPages: number }> => {
     try {
+        // Obtener los mapas de ubicaciones y tipos de inmuebles
+        const [ubicacionesMap, tiposInmueblesMap, tiposOperacionMap] = await Promise.all([
+            fetchUbicacionesMap(), // Mapa de ciudades (nombre -> ID)
+            fetchTiposInmueblesMap(), // Mapa de tipos de inmuebles (nombre -> ID)
+            fetchTiposOperacionMap(), // Mapa de tipos de operación (nombre -> ID)
+        ]);
+
         // Construir la URL con los filtros y la paginación
         const params = new URLSearchParams();
 
         // Agregar filtros dinámicamente
         if (query.tipo_operacion) {
-            const tipoOperacion = Array.isArray(query.tipo_operacion)
-                ? query.tipo_operacion.join(",") // Combina los valores del array en una cadena separada por comas
-                : query.tipo_operacion; // Si es un string, úsalo directamente
 
-            params.append("tipo_operacion", tipoOperacion); // Agrega el filtro a los parámetros
+            const tipoOperacion = Array.isArray(query.tipo_operacion)
+                ? query.tipo_operacion.map((op) => tiposOperacionMap[op] || op).join(",") // Convertir nombres a IDs
+                : tiposOperacionMap[query.tipo_operacion] || query.tipo_operacion;
+
+            params.append("tipo_operacion", tipoOperacion); // Agregar los IDs a los parámetros
         }
 
-        if (query.ubicacion) {
-            const ubicacion = Array.isArray(query.ubicacion)
-                ? query.ubicacion.join(",")
-                : query.ubicacion;
+        if (query.ciudades) {
 
-            params.append("ubicacion", ubicacion);
+            const ciudades = Array.isArray(query.ciudades)
+                ? query.ciudades
+                    .map((loc) => {
+                        const id = ubicacionesMap[loc]; // Buscar el ID en el mapa de ubicaciones                        
+
+                        console.log(`Mapeando "${loc}" a ID:`, id); // Depuración: Verifica cada mapeo
+                        return id || loc; // Si no encuentra el ID, usa el valor original
+                    })
+                    .join(",") // Combina los IDs en una cadena separada por comas
+                : ubicacionesMap[query.ciudades] || query.ubicacion;
+
+            console.log("Ubicación final para params:", ciudades); // Depuración: Verifica el valor final
+            params.append("ciudades", ciudades.toString()); // Agregar los IDs a los parámetros
         }
 
         if (query.tipo_inmueble) {
-            const tipoInmueble = Array.isArray(query.tipo_inmueble)
-                ? query.tipo_inmueble.join(",")
-                : query.tipo_inmueble;
 
-            params.append("tipo_inmueble", tipoInmueble);
+            console.log("Query tipo_inmueble:", query.tipo_inmueble); // Depuración: Verifica el valor recibido
+            console.log("inmuebles map:", tiposInmueblesMap); // Depuración: Verifica el mapa de ubicaciones
+
+            const tipoInmueble = Array.isArray(query.tipo_inmueble)
+                ? query.tipo_inmueble.map((tipo) => tiposInmueblesMap[tipo] || tipo).join(",") // Convertir nombres a IDs
+                : tiposInmueblesMap[query.tipo_inmueble] || query.tipo_inmueble;
+
+            params.append("tipo_inmueble", tipoInmueble); // Agregar los IDs a los parámetros
         }
 
         // Agregar parámetros de paginación
@@ -104,7 +126,6 @@ export const fetchFilteredProperties = async (
         params.append("per_page", perPage.toString());
 
         console.log("params", params.toString()); // Imprimir los parámetros de búsqueda en la consola
-
 
         // Llamar a la API de WordPress con los filtros y la paginación
         const res = await fetch(

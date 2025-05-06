@@ -13,7 +13,7 @@ type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
 const querySchema = z.object({
     tipo_operacion: z.string().optional(),
-    ubicacion: z.preprocess(
+    ciudades: z.preprocess(
         (value) => (typeof value === "string" ? value.split(",") : value),
         z.array(z.string()).optional()
     ),
