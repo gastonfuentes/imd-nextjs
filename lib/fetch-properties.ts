@@ -69,7 +69,7 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
 export const fetchFilteredProperties = async (
     query: Record<string, string | string[]>, // Filtros
     page: number = 1, // Página actual
-    perPage: number = 10 // Propiedades por página
+    perPage: number = 6 // Propiedades por página
 ): Promise<{ properties: SimpleInmueble[]; totalPages: number }> => {
     try {
         // Obtener los mapas de ubicaciones y tipos de inmuebles
@@ -81,6 +81,8 @@ export const fetchFilteredProperties = async (
 
         // Construir la URL con los filtros y la paginación
         const params = new URLSearchParams();
+
+
 
         // Agregar filtros dinámicamente
         if (query.tipo_operacion) {
@@ -111,8 +113,6 @@ export const fetchFilteredProperties = async (
 
         if (query.tipo_inmueble) {
 
-            console.log("Query tipo_inmueble:", query.tipo_inmueble); // Depuración: Verifica el valor recibido
-            console.log("inmuebles map:", tiposInmueblesMap); // Depuración: Verifica el mapa de ubicaciones
 
             const tipoInmueble = Array.isArray(query.tipo_inmueble)
                 ? query.tipo_inmueble.map((tipo) => tiposInmueblesMap[tipo] || tipo).join(",") // Convertir nombres a IDs
@@ -121,8 +121,13 @@ export const fetchFilteredProperties = async (
             params.append("tipo_inmueble", tipoInmueble); // Agregar los IDs a los parámetros
         }
 
-        // Agregar parámetros de paginación
-        params.append("page", page.toString());
+        if (query.page) {
+            const pageFromQuery = Array.isArray(query.page) ? query.page[0] : query.page; // Manejar si viene como array
+            params.append("page", pageFromQuery.toString()); // Agregar el número de página al objeto params
+        } else {
+            params.append("page", page.toString()); // Usar el valor predeterminado si no viene en query
+        }
+
         params.append("per_page", perPage.toString());
 
         console.log("params", params.toString()); // Imprimir los parámetros de búsqueda en la consola
