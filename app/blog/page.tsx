@@ -14,7 +14,7 @@ import { PaginationFront } from "@/components/Pagination"
 export default async function BlogPage() {
 
     const featuredPosts = await fetchFeaturedPosts()
-    const posts = await fetchPosts()
+    const { posts, totalPages } = await fetchPosts()
     const categorias = await fetchCategories()
 
     return (
@@ -32,144 +32,11 @@ export default async function BlogPage() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 {/* Blog Posts */}
                 <div className="lg:col-span-2">
-                    {/* Category Tabs */}
-                    {/*  <Tabs defaultValue="all" className="mb-8">
-                        <TabsList className="w-full max-w-md mx-auto grid grid-cols-3 h-auto">
-                            <TabsTrigger value="all">Todos</TabsTrigger>
-                            <TabsTrigger value="consejos">Consejos</TabsTrigger>
-                            <TabsTrigger value="inversion">Inversión</TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="all">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                {posts.map((post) => (
-                                    <Card key={post.id} className="overflow-hidden">
-                                        <div className="aspect-video relative">
-                                            <Image
-                                                src={post.image || placeholder}
-                                                alt={post.title}
-                                                className="object-cover w-full h-full"
-                                                width={500}
-                                                height={300}
-                                            />
-                                            <Badge className="absolute top-3 left-3 bg-primary/90">{post.categories}</Badge>
-                                        </div>
-                                        <CardHeader className="p-4 pb-0">
-                                            <div className="flex items-center text-sm text-muted-foreground mb-2">
-                                                <Calendar className="h-3 w-3 mr-1" />
-                                                <span>{post.date}</span>
-                                                <span className="mx-2">•</span>
-                                                <User className="h-3 w-3 mr-1" />
-                                                <span>{post.author}</span>
-                                            </div>
-                                            <Link href={`/blog/${post.slug}`} className="hover:underline">
-                                                <h2 className="text-xl font-semibold line-clamp-2">{post.title}</h2>
-                                            </Link>
-                                        </CardHeader>
-                                        <CardContent className="p-4 pt-2">
-                                            <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                                        </CardContent>
-                                        <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
-                                            {post.tags.map((tag) => (
-                                                <Badge key={tag} variant="outline">
-                                                    {tag}
-                                                </Badge>
-                                            ))}
-                                        </CardFooter>
-                                    </Card>
-                                ))}
-                            </div>
-                        </TabsContent>
-                        <TabsContent value="consejos">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                {blogPosts
-                                    .filter((post) => post.category === "Consejos")
-                                    .map((post) => (
-                                        <Card key={post.id} className="overflow-hidden">
-                                            <div className="aspect-video relative">
-                                                <Image
-                                                    src={post.image || placeholder}
-                                                    alt={post.title}
-                                                    className="object-cover w-full h-full"
-                                                    width={500}
-                                                    height={300}
-                                                />
-                                                <Badge className="absolute top-3 left-3 bg-primary/90">{post.category}</Badge>
-                                            </div>
-                                            <CardHeader className="p-4 pb-0">
-                                                <div className="flex items-center text-sm text-muted-foreground mb-2">
-                                                    <Calendar className="h-3 w-3 mr-1" />
-                                                    <span>{post.date}</span>
-                                                    <span className="mx-2">•</span>
-                                                    <User className="h-3 w-3 mr-1" />
-                                                    <span>{post.author}</span>
-                                                </div>
-                                                <Link href={`/blog/${post.slug}`} className="hover:underline">
-                                                    <h2 className="text-xl font-semibold line-clamp-2">{post.title}</h2>
-                                                </Link>
-                                            </CardHeader>
-                                            <CardContent className="p-4 pt-2">
-                                                <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                                            </CardContent>
-                                            <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
-                                                {post.tags.map((tag) => (
-                                                    <Badge key={tag} variant="outline">
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                            </CardFooter>
-                                        </Card>
-                                    ))}
-                            </div>
-                        </TabsContent>
-                        <TabsContent value="inversion">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                                {blogPosts
-                                    .filter((post) => post.category === "Inversión")
-                                    .map((post) => (
-                                        <Card key={post.id} className="overflow-hidden">
-                                            <div className="aspect-video relative">
-                                                <Image
-                                                    src={post.image || placeholder}
-                                                    alt={post.title}
-                                                    className="object-cover w-full h-full"
-                                                    width={500}
-                                                    height={300}
-                                                />
-
-                                                <Badge className="absolute top-3 left-3 bg-primary/90">{post.category}</Badge>
-                                            </div>
-                                            <CardHeader className="p-4 pb-0">
-                                                <div className="flex items-center text-sm text-muted-foreground mb-2">
-                                                    <Calendar className="h-3 w-3 mr-1" />
-                                                    <span>{post.date}</span>
-                                                    <span className="mx-2">•</span>
-                                                    <User className="h-3 w-3 mr-1" />
-                                                    <span>{post.author}</span>
-                                                </div>
-                                                <Link href={`/blog/${post.slug}`} className="hover:underline">
-                                                    <h2 className="text-xl font-semibold line-clamp-2">{post.title}</h2>
-                                                </Link>
-                                            </CardHeader>
-                                            <CardContent className="p-4 pt-2">
-                                                <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                                            </CardContent>
-                                            <CardFooter className="p-4 pt-0 flex flex-wrap gap-2">
-                                                {post.tags.map((tag) => (
-                                                    <Badge key={tag} variant="outline">
-                                                        {tag}
-                                                    </Badge>
-                                                ))}
-                                            </CardFooter>
-                                        </Card>
-                                    ))}
-                            </div>
-                        </TabsContent>
-                    </Tabs> */}
-
+                    {/* Posts Grid */}
                     <PostsGrid posts={posts} />
 
                     {/* Pagination */}
-                    <PaginationFront />
+                    <PaginationFront totalPages={totalPages} />
                 </div>
 
                 {/* Sidebar */}

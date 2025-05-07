@@ -11,7 +11,7 @@ const formatDate = (dateString: Date): string => {
 
 
 // Función para obtener todos los posts con datos completos
-export const fetchPosts = async (): Promise<SimplePost[]> => {
+export const fetchPosts = async (): Promise<{ posts: SimplePost[]; totalPages: number }> => {
     try {
 
         const res = await fetch("https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/entradas/?_embed", { next: { revalidate: 60 } });
@@ -19,9 +19,12 @@ export const fetchPosts = async (): Promise<SimplePost[]> => {
             throw new Error("Error al obtener los posts");
         }
 
+        // Obtener el total de páginas desde los encabezados de la API
+        const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+
         const data: PostsResponse[] = await res.json();
 
-        return data.map((post) => ({
+        const posts = data.map((post) => ({
             id: post.id,
             title: post.title.rendered,
             excerpt: post.excerpt.rendered,
@@ -34,9 +37,11 @@ export const fetchPosts = async (): Promise<SimplePost[]> => {
             date: formatDate(post.date), // Formatear la fecha
         }));
 
+        return { posts, totalPages }; // Devolver los posts y el total de páginas
+
     } catch (error) {
         console.error("Error en fetchposts:", error);
-        return []; // Devuelve un array vacío en caso de error
+        return { posts: [], totalPages: 1 }; // Devuelve un array vacío en caso de error
     }
 };
 

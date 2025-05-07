@@ -51,7 +51,7 @@ export const PropertyGrid = ({ propiedades, tipos, ubicaciones, totalPages }: { 
 
             </div>
             <footer>
-                <PaginationFront totalPages={totalPages} startTransition={startTransition} />
+                <PaginationFront totalPages={totalPages} />
             </footer>
 
         </>
