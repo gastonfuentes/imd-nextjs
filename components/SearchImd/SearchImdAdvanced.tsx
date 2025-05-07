@@ -17,7 +17,7 @@ export function SearchImdAdvanced({ ubicaciones, tipos, startTransition }: { ubi
     return (
         <div className="grid md:grid-cols-3 gap-2">
             <SearchTypeOperation noServer={false} startTransition={startTransition} />
-            <SearchTypePropertySelect options={ubicaciones} placeholder="Ciudad" queryKey="ubicacion" noServer={false} startTransition={startTransition} />
+            <SearchTypePropertySelect options={ubicaciones} placeholder="Ciudad" queryKey="ciudades" noServer={false} startTransition={startTransition} />
             <SearchTypePropertySelect options={tipos} queryKey="tipo_inmueble" noServer={false} startTransition={startTransition} />
 
         </div>

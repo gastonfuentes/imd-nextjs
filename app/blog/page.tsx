@@ -1,14 +1,4 @@
 
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
-
-
 
 import { fetchFeaturedPosts, fetchPosts } from "@/lib/fetch-posts"
 import { PostsGrid } from "@/posts/components/PostsGrid"
@@ -16,6 +6,7 @@ import { fetchCategories } from "@/lib/fetch-categories"
 import { CategoriesCard } from "@/posts/components/CategoriesCard"
 import { FeaturedPostsCard } from "@/posts/components/FeaturedPostsCard"
 import { CallToAction } from "@/posts/components/CallToAction"
+import { PaginationFront } from "@/components/Pagination"
 
 
 
@@ -178,27 +169,7 @@ export default async function BlogPage() {
                     <PostsGrid posts={posts} />
 
                     {/* Pagination */}
-                    <Pagination className="mt-8">
-                        <PaginationContent>
-                            <PaginationItem>
-                                <PaginationPrevious href="#" />
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#" isActive>
-                                    1
-                                </PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">2</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationLink href="#">3</PaginationLink>
-                            </PaginationItem>
-                            <PaginationItem>
-                                <PaginationNext href="#" />
-                            </PaginationItem>
-                        </PaginationContent>
-                    </Pagination>
+                    <PaginationFront />
                 </div>
 
                 {/* Sidebar */}

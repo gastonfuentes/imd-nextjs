@@ -6,11 +6,12 @@ import PropertyCard from './PropertyCard';
 import { Option } from './SearchTypeProperty/SearchTypePropertySelect';
 import { useTransition } from 'react';
 import PropertyCardSkeleton from './PropertyCardSkeleton';
+import { PaginationFront } from './Pagination';
 
 
 
 
-export const PropertyGrid = ({ propiedades, tipos, ubicaciones }: { propiedades: SimpleInmueble[], tipos: Option[], ubicaciones: Option[] }) => {
+export const PropertyGrid = ({ propiedades, tipos, ubicaciones, totalPages }: { propiedades: SimpleInmueble[], tipos: Option[], ubicaciones: Option[], totalPages: number }) => {
 
     const [isPending, startTransition] = useTransition();
 
@@ -49,6 +50,9 @@ export const PropertyGrid = ({ propiedades, tipos, ubicaciones }: { propiedades:
                 )}
 
             </div>
+            <footer>
+                <PaginationFront totalPages={totalPages} startTransition={startTransition} />
+            </footer>
 
         </>
     )

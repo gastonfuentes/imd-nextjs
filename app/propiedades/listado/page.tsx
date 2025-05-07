@@ -9,11 +9,13 @@ import { fetchUbicaciones } from "@/lib/fetch-ubicaciones";
 import { SimpleUbicacion } from "@/inmuebles/interfaces/simple-ubicacion";
 
 
+// **Definición de los parámetros de búsqueda**
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
+// **Definición del esquema de validación de los parámetros de búsqueda**
 const querySchema = z.object({
     tipo_operacion: z.string().optional(),
-    ubicacion: z.preprocess(
+    ciudades: z.preprocess(
         (value) => (typeof value === "string" ? value.split(",") : value),
         z.array(z.string()).optional()
     ),
@@ -21,18 +23,18 @@ const querySchema = z.object({
         (value) => (typeof value === "string" ? value.split(",") : value),
         z.array(z.string()).optional()
     ),
+    page: z.string().optional(),
 });
 
+
+// **Definición de la función `ListadoPage` que se encarga de renderizar la página de listado de propiedades**
 export default async function ListadoPage(props: { searchParams: SearchParams }) {
-    // Hook para manejar transiciones de estado
 
-    const searchParamas = await props.searchParams;
-
-    console.log("searchParams", searchParamas); // Imprimir los parámetros de búsqueda en la consola
-
+    const searchParamas = await props.searchParams; // Obtener los parámetros de búsqueda de la URL     
 
     const query = querySchema.parse(searchParamas); // Validar los parámetros de búsqueda
-    const propiedadesFiltradas = await fetchFilteredProperties(query); // Filtrar las propiedades según los parámetros de búsqueda
+    const { properties, totalPages } = await fetchFilteredProperties(query); // Filtrar las propiedades según los parámetros de búsqueda
+
 
 
     // Obtener los tipos de inmuebles y formatearlos al tipo Option
@@ -52,7 +54,9 @@ export default async function ListadoPage(props: { searchParams: SearchParams })
     return (
         <div className="w-5/6 mx-auto mt-8 p-4 rounded-md shadow-md bg-white">
 
-            <PropertyGrid propiedades={propiedadesFiltradas} tipos={tipos} ubicaciones={ubicaciones} />
+            {/* //**Renderizar el componente `PropertyGrid` con las propiedades, tipos y ubicaciones obtenidas**
+            // **También se pasa el número total de páginas para la paginación** */}
+            <PropertyGrid propiedades={properties} tipos={tipos} ubicaciones={ubicaciones} totalPages={totalPages} />
 
         </div >
     )
