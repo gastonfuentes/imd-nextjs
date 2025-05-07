@@ -1,7 +1,7 @@
 'use client'
 
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { useQueryState } from 'nuqs';
+import { parseAsString, useQueryState } from 'nuqs';
 
 interface MultiOparationProps {
     noServer: boolean; // Propiedad para evitar la carga del servidor
@@ -12,9 +12,17 @@ export function SearchTypeOperation({ noServer, startTransition }: MultiOparatio
     const [operacion, setOperacion] = useQueryState('tipo_operacion', { defaultValue: '', shallow: noServer, startTransition }); // Valor predeterminado: "alquilar" 
 
 
+    const [, setPage] = useQueryState(
+        "page",
+        parseAsString.withDefault("1").withOptions({
+            shallow: true,
+            startTransition,
+        })
+    ); // Manejar el estado de `page` con nuqs
+
 
     return (
-        <Tabs defaultValue={operacion.toString()} className="w-full" onValueChange={(value) => setOperacion(value)}>
+        <Tabs defaultValue={operacion.toString()} className="w-full" onValueChange={(value) => { setOperacion(value); setPage("1") }}>
             <TabsList className="grid w-full grid-cols-2 gap-2">
                 <TabsTrigger value='alquiler' className="bg-white cursor-pointer hover:bg-secondary ">Alquilar</TabsTrigger>
                 <TabsTrigger value="venta" className="bg-white cursor-pointer hover:bg-secondary ">Comprar</TabsTrigger>

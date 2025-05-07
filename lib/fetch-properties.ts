@@ -130,7 +130,7 @@ export const fetchFilteredProperties = async (
 
         params.append("per_page", perPage.toString());
 
-        console.log("params", params.toString()); // Imprimir los parámetros de búsqueda en la consola
+        /*  console.log("params", params.toString()); // Imprimir los parámetros de búsqueda en la consola */
 
         // Llamar a la API de WordPress con los filtros y la paginación
         const res = await fetch(

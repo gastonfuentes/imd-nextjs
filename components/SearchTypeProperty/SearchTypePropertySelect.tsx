@@ -41,17 +41,36 @@ export function SearchTypePropertySelect({
         shallow: noServer, startTransition // Evita recargar la página al actualizar la URL
     })); // Sincronizar los tipos seleccionados con la URL usando nuqs
 
+    const [page, setPage] = useQueryState(
+        "page",
+        parseAsString.withDefault("1").withOptions({
+            shallow: true,
+            startTransition,
+        })
+    ); // Manejar el estado de `page` con nuqs
+
+    console.log("page actual", page); // Imprimir el valor de `page` en la consola
+
+
     const [open, setOpen] = React.useState(false);
 
     const handleUnselect = (item: string) => {
         setSelected(selected.filter((i) => i !== item)); // Remover el tipo de la lista seleccionada
+
+        // **Actualizar el valor de `page` a `1` en los searchParams**
+        setPage("1"); // Usar `setPage` para actualizar el estado de `page`
     };
 
     const handleSelect = (value: string) => {
         if (selected.includes(value)) {
             setSelected(selected.filter((item) => item !== value)); // Si ya está seleccionado, lo elimina
+
+
         } else {
             setSelected([...selected, value]); // Si no está seleccionado, lo agrega
+
+            // **Actualizar el valor de `page` a `1` en los searchParams**
+            setPage("1"); // Usar `setPage` para actualizar el estado de `page`
         }
     };
 

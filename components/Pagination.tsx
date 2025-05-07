@@ -35,7 +35,11 @@ export const PaginationFront = ({ totalPages, startTransition }: { totalPages: n
                             e.preventDefault();
                             handlePreviousPage();
                         }}
-                    /* disabled={page === 1} */ // Deshabilitar si estamos en la primera página
+                        aria-disabled={page <= 1}
+                        tabIndex={page <= 1 ? -1 : undefined}
+                        className={
+                            page <= 1 ? "pointer-events-none opacity-50" : undefined
+                        }
                     />
                 </PaginationItem>
 
@@ -66,7 +70,11 @@ export const PaginationFront = ({ totalPages, startTransition }: { totalPages: n
                             e.preventDefault();
                             handleNextPage();
                         }}
-                    /*  disabled={page === totalPages} */ // Deshabilitar si estamos en la última página
+                        aria-disabled={page >= totalPages}
+                        tabIndex={page >= totalPages ? -1 : undefined}
+                        className={
+                            page >= totalPages ? "pointer-events-none opacity-50" : undefined
+                        }
                     />
                 </PaginationItem>
             </PaginationContent>
