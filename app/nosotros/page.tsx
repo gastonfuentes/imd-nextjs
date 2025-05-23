@@ -1,14 +1,18 @@
 import type { Metadata } from "next"
 /* import Link from "next/link" */
 import Image from "next/image"
-import { Award, Building, Clock, Users, CheckCircle, Star, TrendingUp, Heart } from "lucide-react"
+import { Award, Building, Clock, Users, CheckCircle, Star, TrendingUp, Heart, } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+/* import { Button } from "@/components/ui/button" */
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+/* import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar" */
 import { Badge } from "@/components/ui/badge"
 import { CallToAction, TestimoniosGrid } from "@/components/Home"
+/* import Link from "next/link"
+import placeholder from '@/app/images/image.png';
+import agrimensor from '@/public/agrimensura.jpg'; */
+import { ServiciosCard } from "@/components/Nosotros/ServiciosCard"
 
 export const metadata: Metadata = {
     title: "Nosotros | InmobiliariaXYZ",
@@ -16,6 +20,37 @@ export const metadata: Metadata = {
 }
 
 export default function AboutPage() {
+
+    const services = [
+        {
+            title: "Servicios de Arquitectura",
+            description: "Nuestro equipo de arquitectos altamente calificados ofrece soluciones creativas y funcionales para todo tipo de proyectos, desde residenciales hasta comerciales.",
+            image: "/arquitectura.jpg",
+            items: [
+                "Diseño arquitectónico",
+                "Planificación de espacios",
+                "Asesoría en construcción",
+                "Gestión de proyectos",
+                "Reformas y remodelaciones",
+                "y mucho más...",
+            ],
+        },
+        {
+            title: "Servicios de Agrimensura",
+            description: "Contamos con agrimensores expertos que realizan mediciones precisas y estudios topográficos detallados para garantizar la seguridad jurídica y técnica de tu propiedad.",
+            image: "/agrimensura.jpg",
+            items: [
+                "Levantamientos topográficos",
+                "Deslindes y amojonamientos",
+                "Subdivisión de terrenos",
+                "Certificados catastrales",
+                "Peritajes técnicos",
+                "y mucho más...",
+            ],
+        },
+    ]
+
+
     return (
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
@@ -65,7 +100,7 @@ export default function AboutPage() {
                         </div>
                         <div className="relative h-[400px] rounded-lg overflow-hidden">
                             <Image
-                                src="/amigas.jpg"
+                                src="/amigas-plano.jpg"
                                 alt="Historia de InmobiliariaXYZ"
                                 fill
                                 className="object-cover"
@@ -237,331 +272,32 @@ export default function AboutPage() {
                 </div>
             </section>
 
-            {/* Team Section */}
+
+            {/* Servicios Complementarios Section */}
             <section className="py-16">
                 <div className="container px-4 mx-auto">
                     <div className="text-center mb-12">
-                        <Badge className="mb-4 bg-accent text-accent-foreground">Nuestro Equipo</Badge>
-                        <h2 className="text-3xl font-bold mb-4 text-primary">Conoce a Nuestros Expertos</h2>
+                        <Badge className="mb-4 bg-accent text-accent-foreground">Servicios Complementarios</Badge>
+                        <h2 className="text-3xl font-bold mb-4 text-primary">Soluciones Integrales para tus Proyectos</h2>
                         <p className="text-primary/70 max-w-2xl mx-auto">
-                            Contamos con un equipo de profesionales altamente capacitados y comprometidos con tu satisfacción.
+                            Además de nuestros servicios inmobiliarios, ofrecemos servicios profesionales complementarios para cubrir
+                            todas tus necesidades.
                         </p>
                     </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {/* Team Member 1 */}
-                        <Card className="bg-secondary text-primary">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto mb-4">
-                                    <Avatar className="h-32 w-32">
-                                        <AvatarImage src="/placeholder.svg?height=128&width=128&text=CEO" alt="Carlos Rodríguez" />
-                                        <AvatarFallback>CR</AvatarFallback>
-                                    </Avatar>
-                                </div>
-                                <CardTitle>Carlos Rodríguez</CardTitle>
-                                <CardDescription className="text-primary/70">CEO & Fundador</CardDescription>
-                            </CardHeader>
-                            <CardContent className="text-center">
-                                <p className="text-sm text-primary/70">
-                                    Con más de 20 años de experiencia en el sector inmobiliario, Carlos fundó InmobiliariaXYZ con la
-                                    visión de transformar la industria.
-                                </p>
-                            </CardContent>
-                            <CardFooter className="flex justify-center gap-2">
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">LinkedIn</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-linkedin"
-                                    >
-                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                        <rect width="4" height="12" x="2" y="9" />
-                                        <circle cx="4" cy="4" r="2" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Twitter</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-twitter"
-                                    >
-                                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Email</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-mail"
-                                    >
-                                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                    </svg>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-
-                        {/* Team Member 2 */}
-                        <Card className="bg-secondary text-primary">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto mb-4">
-                                    <Avatar className="h-32 w-32">
-                                        <AvatarImage src="/placeholder.svg?height=128&width=128&text=COO" alt="Ana Martínez" />
-                                        <AvatarFallback>AM</AvatarFallback>
-                                    </Avatar>
-                                </div>
-                                <CardTitle>Ana Martínez</CardTitle>
-                                <CardDescription className="text-primary/70">Directora de Operaciones</CardDescription>
-                            </CardHeader>
-                            <CardContent className="text-center">
-                                <p className="text-sm text-primary/70">
-                                    Ana lidera nuestras operaciones diarias, asegurando que cada cliente reciba un servicio excepcional y
-                                    personalizado.
-                                </p>
-                            </CardContent>
-                            <CardFooter className="flex justify-center gap-2">
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">LinkedIn</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-linkedin"
-                                    >
-                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                        <rect width="4" height="12" x="2" y="9" />
-                                        <circle cx="4" cy="4" r="2" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Twitter</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-twitter"
-                                    >
-                                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Email</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-mail"
-                                    >
-                                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                    </svg>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-
-                        {/* Team Member 3 */}
-                        <Card className="bg-secondary text-primary">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto mb-4">
-                                    <Avatar className="h-32 w-32">
-                                        <AvatarImage src="/placeholder.svg?height=128&width=128&text=CFO" alt="Roberto Sánchez" />
-                                        <AvatarFallback>RS</AvatarFallback>
-                                    </Avatar>
-                                </div>
-                                <CardTitle>Roberto Sánchez</CardTitle>
-                                <CardDescription className="text-primary/70">Director Financiero</CardDescription>
-                            </CardHeader>
-                            <CardContent className="text-center">
-                                <p className="text-sm text-primary/70">
-                                    Roberto supervisa todas las operaciones financieras, asegurando la solidez y el crecimiento sostenible
-                                    de la empresa.
-                                </p>
-                            </CardContent>
-                            <CardFooter className="flex justify-center gap-2">
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">LinkedIn</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-linkedin"
-                                    >
-                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                        <rect width="4" height="12" x="2" y="9" />
-                                        <circle cx="4" cy="4" r="2" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Twitter</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-twitter"
-                                    >
-                                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Email</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-mail"
-                                    >
-                                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                    </svg>
-                                </Button>
-                            </CardFooter>
-                        </Card>
-
-                        {/* Team Member 4 */}
-                        <Card className="bg-secondary text-primary">
-                            <CardHeader className="text-center pb-2">
-                                <div className="mx-auto mb-4">
-                                    <Avatar className="h-32 w-32">
-                                        <AvatarImage src="/placeholder.svg?height=128&width=128&text=CMO" alt="Laura Mendoza" />
-                                        <AvatarFallback>LM</AvatarFallback>
-                                    </Avatar>
-                                </div>
-                                <CardTitle>Laura Mendoza</CardTitle>
-                                <CardDescription className="text-primary/70">Directora de Marketing</CardDescription>
-                            </CardHeader>
-                            <CardContent className="text-center">
-                                <p className="text-sm text-primary/70">
-                                    Laura lidera nuestras estrategias de marketing, asegurando que nuestras propiedades lleguen a los
-                                    clientes adecuados.
-                                </p>
-                            </CardContent>
-                            <CardFooter className="flex justify-center gap-2">
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">LinkedIn</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-linkedin"
-                                    >
-                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                        <rect width="4" height="12" x="2" y="9" />
-                                        <circle cx="4" cy="4" r="2" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Twitter</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-twitter"
-                                    >
-                                        <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-                                    </svg>
-                                </Button>
-                                <Button variant="outline" size="sm" className="rounded-full w-8 h-8 p-0 border-primary/20">
-                                    <span className="sr-only">Email</span>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        strokeWidth="2"
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        className="lucide lucide-mail"
-                                    >
-                                        <rect width="20" height="16" x="2" y="4" rx="2" />
-                                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                    </svg>
-                                </Button>
-                            </CardFooter>
-                        </Card>
+                        {
+                            services.map((service, index) => (
+                                <ServiciosCard
+                                    key={index}
+                                    title={service.title}
+                                    description={service.description}
+                                    image={service.image}
+                                    items={service.items}
+                                />
+                            ))
+                        }
                     </div>
-
-                    {/*  <div className="text-center mt-8">
-                        <Button variant="outline" className="border-primary/20 text-primary hover:bg-primary/5" asChild>
-                            <Link href="/equipo">
-                                Ver equipo completo
-                                <ArrowRight className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
-                    </div> */}
                 </div>
             </section>
 
