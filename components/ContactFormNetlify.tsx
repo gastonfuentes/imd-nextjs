@@ -89,7 +89,7 @@ export default function ContactFormNetlify() {
                         Gracias por contactarnos. Uno de nuestros asesores se pondrá en contacto contigo a la brevedad.
                     </AlertDescription>
                     <Button
-                        className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90"
+                        className="mt-4 bg-primary text-primary-foreground hover:bg-primary/90 col-span-2"
                         onClick={() => setIsSuccess(false)}
                     >
                         Enviar otro mensaje
