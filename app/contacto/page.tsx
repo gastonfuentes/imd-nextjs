@@ -12,7 +12,7 @@ import ContactFormNetlify from "@/components/ContactFormNetlify"
 export const metadata: Metadata = {
     title: "Contacto | InmobiliariaXYZ",
     description:
-        "Ponte en contacto con nosotros para resolver tus dudas o solicitar información sobre nuestras propiedades.",
+        "Ponte en contacto con nosotros para resolver tus dudas o solicitar información sobre nuestras propiedades...",
 }
 
 export default function ContactPage() {
