@@ -32,7 +32,7 @@ export default function PropertyContactForm({ propertyId, propertyTitle, propert
         name: "",
         email: "",
         phone: "",
-        message: `Estoy interesado/a en esta propiedad - (ID: ${propertyId}). Por favor contáctenme para más información.`,
+        message: `Estoy interesado/a en esta propiedad (ID: ${propertyId}). Por favor contáctenme para más información.`,
     })
     const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
 
