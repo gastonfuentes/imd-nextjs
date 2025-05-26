@@ -26,10 +26,10 @@ export default function Footer() {
                                 <Facebook className="h-5 w-5" />
                                 <span className="sr-only">Facebook</span>
                             </Link> */}
-                            <Link href={CONTACT_INFO.instagram} target="_blank" className="hover:text-white transition-colors">
+                            {/*  <Link href={CONTACT_INFO.instagram} target="_blank" className="hover:text-white transition-colors">
                                 <Instagram className="h-10 w-10" />
                                 <span className="sr-only">Instagram</span>
-                            </Link>
+                            </Link> */}
                             {/*  <Link href="#" className="hover:text-white transition-colors">
                                 <Twitter className="h-5 w-5" />
                                 <span className="sr-only">Twitter</span>
@@ -55,14 +55,14 @@ export default function Footer() {
                                     Propiedades
                                 </Link>
                             </li>
-                            <li>
+                            {/*  <li>
                                 <Link href="/servicios" className="text-slate-400 hover:text-white transition-colors">
                                     Servicios
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
-                                <Link href="/agentes" className="text-slate-400 hover:text-white transition-colors">
-                                    Agentes
+                                <Link href="/nosotros" className="text-slate-400 hover:text-white transition-colors">
+                                    Nosotros
                                 </Link>
                             </li>
                             <li>
@@ -107,6 +107,14 @@ export default function Footer() {
                                     className="text-slate-400 hover:text-white transition-colors" target="_blank">
 
                                     {CONTACT_INFO.email}
+                                </Link>
+                            </li><li className="flex items-center">
+                                <Instagram className="h-5 w-5 mr-2 flex-shrink-0" />
+                                <Link
+                                    href={CONTACT_INFO.instagram}
+                                    className="text-slate-400 hover:text-white transition-colors" target="_blank">
+
+                                    Instagram
                                 </Link>
                             </li>
                         </ul>
