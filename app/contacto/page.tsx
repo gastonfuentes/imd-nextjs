@@ -5,7 +5,8 @@ import { Mail, Phone, MapPin, Clock, ArrowRight, Facebook, Instagram, Twitter, L
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import ContactForm from "@/components/ContactForm"
+/* import ContactForm from "@/components/ContactForm" */
+import ContactFormNetlify from "@/components/ContactFormNetlify"
 
 
 export const metadata: Metadata = {
@@ -37,7 +38,7 @@ export default function ContactPage() {
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
-                            <ContactForm />
+                            <ContactFormNetlify />
                         </CardContent>
                     </Card>
                 </div>
@@ -139,9 +140,18 @@ export default function ContactPage() {
                     <CardDescription className="text-primary/70">Visítanos en nuestra oficina central</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="aspect-[21/9] bg-primary/5 rounded-md flex items-center justify-center">
+                    {/*  <div className="aspect-[21/9] bg-primary/5 rounded-md flex items-center justify-center">
                         <p className="text-primary/50">Mapa de ubicación</p>
-                    </div>
+                    </div> */}
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6215.520087144692!2d-68.0521701494388!3d-38.83795595723658!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x960a4a058ecfbe11%3A0x1d9f7a780fbb7b04!2sR%C3%ADo%20Colorado%2C%20R8303%20Cinco%20Saltos%2C%20R%C3%ADo%20Negro!5e0!3m2!1ses-419!2sar!4v1748012367322!5m2!1ses-419!2sar"
+                        width="770"
+                        height="600"
+                        style={{ border: 0 }}
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                        className="w-full rounded-md"></iframe>
                 </CardContent>
             </Card>
 
