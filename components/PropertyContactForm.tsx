@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
-import { Send } from "lucide-react"
+import { MessageCircle } from "lucide-react"
+import { z } from "zod"
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,33 +14,73 @@ import { Label } from "@/components/ui/label"
 interface PropertyContactFormProps {
     propertyId: number
     propertyTitle: string
+    propertyUrl: string
 }
 
-export default function PropertyContactForm({ propertyId, propertyTitle }: PropertyContactFormProps) {
-    const [formData, setFormData] = useState({
+// Esquema de validación con zod
+const formSchema = z.object({
+    name: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
+    email: z.string().email("Ingresa un email válido"),
+    phone: z.string().min(6, "Ingresa un teléfono válido"),
+    message: z.string().min(10, "El mensaje debe tener al menos 10 caracteres"),
+})
+
+type FormData = z.infer<typeof formSchema>
+
+export default function PropertyContactForm({ propertyId, propertyTitle, propertyUrl }: PropertyContactFormProps) {
+    const [formData, setFormData] = useState<FormData>({
         name: "",
         email: "",
         phone: "",
-        message: `Hola, estoy interesado/a en esta propiedad (ID: ${propertyId}). Por favor contáctenme para más información.`,
+        message: `Estoy interesado/a en esta propiedad (ID: ${propertyId}). Por favor contáctenme para más información.`,
     })
+    const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({})
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setFormData((prev) => ({ ...prev, [name]: value }))
+        // Validar campo individualmente
+        const singleField = z.object({ [name]: formSchema.shape[name as keyof FormData] })
+        const result = singleField.safeParse({ [name]: value })
+        setErrors((prev) => ({
+            ...prev,
+            [name]: result.success ? undefined : result.error.issues[0].message,
+        }))
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        // Here you would typically send the form data to your backend
-        console.log("Form submitted:", formData)
-        alert("Mensaje enviado. Nos pondremos en contacto contigo pronto.")
+        const result = formSchema.safeParse(formData)
+        if (!result.success) {
+            // Mostrar errores
+            const fieldErrors: Partial<Record<keyof FormData, string>> = {}
+            result.error.issues.forEach((issue) => {
+                const field = issue.path[0] as keyof FormData
+                fieldErrors[field] = issue.message
+            })
+            setErrors(fieldErrors)
+            return
+        }
+        setErrors({})
+        // Abrir WhatsApp con el mensaje prellenado
+        window.open(whatsappUrl, "_blank")
     }
+
+    // Validación global
+    const isValid = formSchema.safeParse(formData).success
+
+    // Cambia este número por el de tu empresa o agente (formato internacional sin +)
+    const whatsappNumber = "5493804218592"
+    const whatsappMessage = encodeURIComponent(
+        `Hola, soy ${formData.name} (${formData.email}, ${formData.phone}).\n${formData.message}\n\nVer propiedad: ${propertyUrl}`
+    )
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`
 
     return (
         <Card>
             <CardHeader className="pb-3">
                 <CardTitle>Contactar al agente por la propiedad: {propertyTitle}</CardTitle>
-                <CardDescription>Completa el formulario y te contactaremos a la brevedad</CardDescription>
+                <CardDescription>Completa el formulario y te responderemos a la brevedad</CardDescription>
             </CardHeader>
             <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,6 +94,7 @@ export default function PropertyContactForm({ propertyId, propertyTitle }: Prope
                             value={formData.name}
                             onChange={handleChange}
                         />
+                        {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -67,6 +108,7 @@ export default function PropertyContactForm({ propertyId, propertyTitle }: Prope
                             value={formData.email}
                             onChange={handleChange}
                         />
+                        {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -79,6 +121,7 @@ export default function PropertyContactForm({ propertyId, propertyTitle }: Prope
                             value={formData.phone}
                             onChange={handleChange}
                         />
+                        {errors.phone && <p className="text-red-500 text-xs">{errors.phone}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -92,12 +135,21 @@ export default function PropertyContactForm({ propertyId, propertyTitle }: Prope
                             value={formData.message}
                             onChange={handleChange}
                         />
+                        {errors.message && <p className="text-red-500 text-xs">{errors.message}</p>}
                     </div>
 
-                    <Button type="submit" className="w-full">
-                        <Send className="h-4 w-4 mr-2" />
-                        Enviar mensaje
-                    </Button>
+                    <div className="flex flex-col gap-2">
+
+                        <Button
+                            type="submit"
+                            className="w-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center"
+                            disabled={!isValid}
+                        >
+                            <MessageCircle className="h-4 w-4 mr-2" />
+                            Enviar por WhatsApp
+                        </Button>
+
+                    </div>
                 </form>
             </CardContent>
         </Card>

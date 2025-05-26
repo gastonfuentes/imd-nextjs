@@ -101,6 +101,8 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
             maps,
         } = inmueble;
 
+        const propertyUrl = `${process.env.NEXT_PUBLIC_SITE_URL || "https://tusitio.com"}/propiedades/inmuebles/${name}`;
+
         return (
 
 
@@ -249,7 +251,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                     {/* Contact Form */}
                     <div className="lg:col-span-1">
                         <div className="sticky top-8">
-                            <PropertyContactForm propertyId={id} propertyTitle={title} />
+                            <PropertyContactForm propertyId={id} propertyTitle={title} propertyUrl={propertyUrl} />
 
                             <div className="mt-4 flex justify-center">
                                 <Button variant="outline" className="w-full">
