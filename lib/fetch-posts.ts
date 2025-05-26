@@ -137,7 +137,7 @@ export const fetchFeaturedPosts = async (): Promise<SimplePost[]> => {
 
 
 // Función para obtener todos los posts de una categoria determinada
-export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> => {
+export const fetchPostsByCategory = async (slug: string): Promise<{ posts: SimplePost[], totalPages: number }> => {
     try {
         // Obtener el ID de la categoría basada en el slug
         const categoryRes = await fetch(`https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/categories?slug=${slug}`);
@@ -148,7 +148,7 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
         const categoryData = await categoryRes.json();
         if (categoryData.length === 0) {
             console.warn(`No se encontró ninguna categoría con el slug: ${slug}`);
-            return []; // Devuelve un array vacío si no se encuentra la categoría
+            return { posts: [], totalPages: 1 }; // Devuelve un array vacío si no se encuentra la categoría
         }
 
         const categoryId = categoryData[0].id; // Obtener el ID de la categoría
@@ -159,9 +159,12 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
             throw new Error(`Error al obtener los posts de la categoría con ID: ${categoryId}`);
         }
 
+        // Obtener el total de páginas desde los encabezados de la API
+        const totalPages = parseInt(res.headers.get("X-WP-TotalPages") || "1", 10);
+
         const data: PostsResponse[] = await res.json();
 
-        return data.map((post) => ({
+        const posts = data.map((post) => ({
             id: post.id,
             title: post.title.rendered,
             excerpt: post.excerpt.rendered,
@@ -173,9 +176,11 @@ export const fetchPostsByCategory = async (slug: string): Promise<SimplePost[]> 
             image: post._embedded['wp:featuredmedia'][0]?.link || "",
             date: formatDate(post.date), // Formatear la fecha
         }));
+
+        return { posts, totalPages }; // Devolver los posts y el total de páginas
     } catch (error) {
         console.error("Error en fetchPostsByCategory:", error);
-        return []; // Devuelve un array vacío en caso de error
+        return { posts: [], totalPages: 1 }; // Devuelve un array vacío en caso de error
     }
 };
 

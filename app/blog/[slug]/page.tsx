@@ -1,7 +1,7 @@
 import Link from "next/link"
-import { ArrowLeft, Calendar, User, Facebook, Twitter, Linkedin, Mail } from "lucide-react"
+import { ArrowLeft, Calendar, User, /* Facebook */ /* Twitter */ /* Linkedin */ /* Mail */ } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
+/* import { Button } from "@/components/ui/button" */
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { fetchAllSlugsPosts, fetchFeaturedPosts, fetchPostyBySlug } from "@/lib/fetch-posts"
@@ -128,7 +128,7 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                             </div>
 
                             {/* Share Buttons */}
-                            <div className="flex items-center space-x-4 mb-8">
+                            {/*  <div className="flex items-center space-x-4 mb-8">
                                 <span className="text-sm font-medium">Compartir:</span>
                                 <Button variant="ghost" size="icon" className="rounded-full">
                                     <Facebook className="h-4 w-4" />
@@ -146,7 +146,7 @@ export default async function PostPage({ params, }: { params: Promise<{ slug: st
                                     <Mail className="h-4 w-4" />
                                     <span className="sr-only">Compartir por Email</span>
                                 </Button>
-                            </div>
+                            </div> */}
 
                             <Separator className="my-8" />
 
