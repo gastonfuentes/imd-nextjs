@@ -61,7 +61,7 @@ export default function ContactFormNetlify() {
         setIsError(false)
 
         try {
-            await fetch("/", {
+            await fetch("/_forms.html", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: encode({
