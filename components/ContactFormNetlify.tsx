@@ -41,8 +41,8 @@ export default function ContactFormNetlify() {
             name: "",
             email: "",
             phone: "",
-            subject: "",
-            contactPreference: "email",
+            /*  subject: "",
+             contactPreference: "email", */
             message: "",
         },
     })
