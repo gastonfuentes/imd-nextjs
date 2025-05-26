@@ -10,7 +10,12 @@ import {
 } from "@/components/ui/pagination"
 import { parseAsInteger, useQueryState } from "nuqs";
 
-export const PaginationFront = ({ totalPages }: { totalPages: number }) => {
+interface PaginationFrontProps {
+    totalPages: number; // Número total de páginas
+    startTransition?: (callback: () => void) => void; // Propiedad opcional para manejar transiciones
+}
+
+export const PaginationFront = ({ totalPages, startTransition }: PaginationFrontProps) => {
 
     console.log("totalPages desde pagination", totalPages); // Imprimir el número total de páginas en la consola
 
@@ -18,7 +23,7 @@ export const PaginationFront = ({ totalPages }: { totalPages: number }) => {
         'page',
         parseAsInteger
             .withDefault(1)
-            .withOptions({ shallow: false })
+            .withOptions({ shallow: false, startTransition })
     );
 
     const handleNextPage = () => setPage(page + 1);
