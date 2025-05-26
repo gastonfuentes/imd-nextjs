@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu, X, Home, Phone } from "lucide-react"
+import { Menu, X, Home, Phone, Mail } from "lucide-react"
 /* import {  ChevronDown } from "lucide-react" */
 
 import { cn } from "@/lib/utils"
@@ -122,7 +122,7 @@ export default function Navbar() {
                         </Button> */}
                         <Button size="sm" asChild>
                             <Link href="/contacto">
-                                <Phone className="h-4 w-4 mr-2" />
+                                <Mail className="h-4 w-4 mr-2" />
                                 Contactar
                             </Link>
                         </Button>

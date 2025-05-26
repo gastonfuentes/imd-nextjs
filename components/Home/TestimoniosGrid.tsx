@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Card, CardContent } from "../ui/card"
 
 import avatar from "@/app/images/avatar.svg";
+import avatarman from "@/app/images/avatar-man.svg";
 
 
 // Datos de ejemplo para los testimonios
@@ -12,7 +13,7 @@ const testimonials = [
         role: "Comprador",
         content:
             "El servicio fue excepcional. Encontraron exactamente lo que estaba buscando en tiempo récord. Muy profesionales y atentos a mis necesidades.",
-        avatar: avatar,
+        avatar: avatarman,
     },
     {
         id: 2,
@@ -28,7 +29,7 @@ const testimonials = [
         role: "Inversionista",
         content:
             "He trabajado con varias inmobiliarias, pero ninguna como esta. Su conocimiento del mercado y atención personalizada hacen toda la diferencia.",
-        avatar: avatar,
+        avatar: avatarman,
     },
 ]
 
