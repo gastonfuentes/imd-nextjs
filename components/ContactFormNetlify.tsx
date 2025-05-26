@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+/* import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select" */
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { CheckCircle2, AlertCircle } from "lucide-react"
 
@@ -167,7 +167,7 @@ export default function ContactFormNetlify() {
                                     )}
                                 />
 
-                                <FormField
+                                {/*   <FormField
                                     control={form.control}
                                     name="subject"
                                     render={({ field }) => (
@@ -191,10 +191,10 @@ export default function ContactFormNetlify() {
                                             <FormMessage />
                                         </FormItem>
                                     )}
-                                />
+                                /> */}
                             </div>
 
-                            <FormField
+                            {/*  <FormField
                                 control={form.control}
                                 name="contactPreference"
                                 render={({ field }) => (
@@ -229,7 +229,7 @@ export default function ContactFormNetlify() {
                                         <FormMessage />
                                     </FormItem>
                                 )}
-                            />
+                            /> */}
 
                             <FormField
                                 control={form.control}
