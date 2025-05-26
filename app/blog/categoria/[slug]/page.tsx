@@ -2,15 +2,6 @@ import Link from "next/link"
 
 
 import { Card, CardContent, /* CardFooter */ CardHeader } from "@/components/ui/card"
-
-import {
-    Pagination,
-    PaginationContent,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from "@/components/ui/pagination"
 import { Separator } from "@/components/ui/separator"
 
 
@@ -20,6 +11,7 @@ import { fetchCategories } from "@/lib/fetch-categories"
 import { CategoriesCard } from "@/posts/components/CategoriesCard"
 import { SimpleCategory } from '../../../../posts/interfaces/simple-category';
 import { CallToAction } from "@/posts/components/CallToAction"
+import { PaginationFront } from "@/components/Pagination"
 
 
 
@@ -83,7 +75,7 @@ export default async function CategoryPage({ params, }: { params: Promise<{ slug
         const categorias = await fetchCategories()
         /* console.log("categorias", categorias); */
 
-        const posts = await fetchPostsByCategory(slug);
+        const { posts, totalPages } = await fetchPostsByCategory(slug);
 
 
         if (!posts) {
@@ -242,27 +234,7 @@ export default async function CategoryPage({ params, }: { params: Promise<{ slug
                         <PostsGrid posts={posts} />
 
                         {/* Pagination */}
-                        <Pagination className="mt-8">
-                            <PaginationContent>
-                                <PaginationItem>
-                                    <PaginationPrevious href="#" />
-                                </PaginationItem>
-                                <PaginationItem>
-                                    <PaginationLink href="#" isActive>
-                                        1
-                                    </PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem>
-                                    <PaginationLink href="#">2</PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem>
-                                    <PaginationLink href="#">3</PaginationLink>
-                                </PaginationItem>
-                                <PaginationItem>
-                                    <PaginationNext href="#" />
-                                </PaginationItem>
-                            </PaginationContent>
-                        </Pagination>
+                        <PaginationFront totalPages={totalPages} />
                     </div>
 
                     {/* Sidebar */}
