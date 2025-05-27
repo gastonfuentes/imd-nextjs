@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { /* Facebook */ Instagram /* Twitter */,/* Linkedin */ Mail, Phone, MapPin, /* ArrowRight */ } from "lucide-react"
+import { /* Facebook */ Instagram /* Twitter */,/* Linkedin */ Mail, /* Phone */ MapPin, /* MessageCircleMore */ MessageCircle, /* ArrowRight */ } from "lucide-react"
 /* import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button" */
 import { Separator } from "@/components/ui/separator"
@@ -89,21 +89,29 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li className="flex items-center">
-                                <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
-                                <Link href="tel:+123456789" className="text-slate-400 hover:text-white transition-colors" target="_blank">
+                                <MessageCircle className="h-5 w-5 mr-2 flex-shrink-0" />
+                                <Link
+                                    href={`https://wa.me/${CONTACT_INFO.phones[1].replace(/\D/g, "")}?text=${encodeURIComponent("Hola, quiero recibir información sobre sus propiedades.")}`}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                    target="_blank"
+                                >
                                     {CONTACT_INFO.phones[1]}
                                 </Link>
                             </li>
                             <li className="flex items-center">
-                                <Phone className="h-5 w-5 mr-2 flex-shrink-0" />
-                                <Link href="tel:+123456789" className="text-slate-400 hover:text-white transition-colors" target="_blank">
+                                <MessageCircle className="h-5 w-5 mr-2 flex-shrink-0" />
+                                <Link
+                                    href={`https://wa.me/${CONTACT_INFO.phones[0].replace(/\D/g, "")}?text=${encodeURIComponent("Hola, quiero recibir información sobre sus propiedades.")}`}
+                                    className="text-slate-400 hover:text-white transition-colors"
+                                    target="_blank"
+                                >
                                     {CONTACT_INFO.phones[0]}
                                 </Link>
                             </li>
                             <li className="flex items-center">
                                 <Mail className="h-5 w-5 mr-2 flex-shrink-0" />
                                 <Link
-                                    href="mailto:info@inmobiliariaxyz.com"
+                                    href={`mailto:${CONTACT_INFO.email}`}
                                     className="text-slate-400 hover:text-white transition-colors" target="_blank">
 
                                     {CONTACT_INFO.email}

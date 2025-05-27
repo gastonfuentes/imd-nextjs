@@ -70,7 +70,7 @@ export default function PropertyContactForm({ propertyId, propertyTitle, propert
     const isValid = formSchema.safeParse(formData).success
 
     // Cambia este número por el de tu empresa o agente (formato internacional sin +)
-    const whatsappNumber = "5493804218592"
+    const whatsappNumber = "5492996918403"
     const whatsappMessage = encodeURIComponent(
         `Hola, soy ${formData.name} (${formData.email}, ${formData.phone}).\n${formData.message}\n\nVer propiedad: ${propertyUrl}`
     )
