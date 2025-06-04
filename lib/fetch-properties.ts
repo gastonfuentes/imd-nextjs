@@ -43,6 +43,7 @@ export const fetchProperties = async (): Promise<SimpleInmueble[]> => {
             ciudad_nombre: ubicacionesMap[inmueble.ciudades?.[0]?.toString()] || "Desconocido",
             destacado: inmueble.acf.destacado || false,
             banios: inmueble.acf.banios || undefined,
+            moneda: inmueble.acf.moneda || 'ARG',
             maps: inmueble.acf.google_maps || {
                 address: "",
                 lat: 0,
@@ -170,6 +171,7 @@ export const fetchFilteredProperties = async (
             tipo_inmueble_nombre: "Desconocido", // Puedes mapearlo si tienes un mapa de tipos
             destacado: inmueble.acf.destacado || false,
             banios: inmueble.acf.banios || undefined,
+            moneda: inmueble.acf.moneda || 'ARG',
             maps: inmueble.acf.google_maps || {
                 address: "",
                 lat: 0,
@@ -232,6 +234,7 @@ export const fetchPropertyBySlug = async (slug: string): Promise<SimpleInmueble>
             tipo_inmueble_nombre: "Desconocido",
             destacado: inmuebleData.acf.destacado || false,
             banios: inmuebleData.acf.banios || undefined,
+            moneda: inmuebleData.acf.moneda || 'ARG',
             maps: inmuebleData.acf.google_maps || {
                 address: "",
                 lat: 0,
@@ -286,6 +289,7 @@ export const fetchPropertiesSimple = async (): Promise<SimpleInmueble[]> => {
             ciudad_nombre: "Desconocido",
             destacado: inmueble.acf.destacado || false,
             banios: inmueble.acf.banios || undefined,
+            moneda: inmueble.acf.moneda || 'ARG',
             maps: inmueble.acf.google_maps || {
                 address: "",
                 lat: 0,

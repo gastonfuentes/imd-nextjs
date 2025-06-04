@@ -1,33 +1,33 @@
 export interface InmueblesResponse {
-    id: number;
-    date: Date;
-    date_gmt: Date;
-    guid: GUID;
-    modified: Date;
-    modified_gmt: Date;
-    slug: string;
-    status: Status;
-    type: Type;
-    link: string;
-    title: GUID;
-    content: Content;
+    id:             number;
+    date:           Date;
+    date_gmt:       Date;
+    guid:           GUID;
+    modified:       Date;
+    modified_gmt:   Date;
+    slug:           string;
+    status:         Status;
+    type:           Type;
+    link:           string;
+    title:          GUID;
+    content:        Content;
     featured_media: number;
-    template: string;
-    tipo_inmueble: number[];
+    template:       string;
+    tipo_inmueble:  number[];
     tipo_operacion: number[];
-    ciudades: number[];
-    class_list: string[];
-    acf: Acf;
-    _links: Links;
+    ciudades:       number[];
+    class_list:     string[];
+    acf:            Acf;
+    _links:         Links;
 }
 
 export interface Links {
-    self: Self[];
-    collection: About[];
-    about: About[];
+    self:            Self[];
+    collection:      About[];
+    about:           About[];
     "wp:attachment": About[];
-    "wp:term": WpTerm[];
-    curies: Cury[];
+    "wp:term":       WpTerm[];
+    curies:          Cury[];
 }
 
 export interface About {
@@ -35,8 +35,8 @@ export interface About {
 }
 
 export interface Cury {
-    name: Name;
-    href: Href;
+    name:      Name;
+    href:      Href;
     templated: boolean;
 }
 
@@ -49,7 +49,7 @@ export enum Name {
 }
 
 export interface Self {
-    href: string;
+    href:        string;
     targetHints: TargetHints;
 }
 
@@ -62,9 +62,9 @@ export enum Allow {
 }
 
 export interface WpTerm {
-    taxonomy: Taxonomy;
+    taxonomy:   Taxonomy;
     embeddable: boolean;
-    href: string;
+    href:       string;
 }
 
 export enum Taxonomy {
@@ -74,41 +74,42 @@ export enum Taxonomy {
 }
 
 export interface Acf {
-    descripcion?: string;
-    direccion: string;
-    precio: string;
+    descripcion?:                string;
+    direccion:                   string;
+    precio:                      string;
     superficie_construida_total: string;
-    superficie_cubierta_total: string;
-    superficie_del_terreno: string;
-    quincho: boolean;
-    dormitorios: string;
-    cochera: string;
-    plantas: string;
-    banios?: string;
-    google_maps?: GoogleMaps;
-    destacado: boolean;
+    superficie_cubierta_total:   string;
+    superficie_del_terreno:      string;
+    quincho:                     boolean;
+    dormitorios:                 string;
+    cochera:                     string;
+    plantas:                     string;
+    banios?:                     string;
+    google_maps?:                GoogleMaps;
+    destacado:                   boolean;
+    moneda?:                     string;
 }
 
 export interface GoogleMaps {
-    address: string;
-    lat: number;
-    lng: number;
-    zoom: number;
-    place_id: string;
-    street_number: string;
-    street_name: string;
+    address:            string;
+    lat:                number;
+    lng:                number;
+    zoom:               number;
+    place_id:           string;
+    city:               string;
+    state:              string;
+    state_short?:       string;
+    post_code:          string;
+    country:            string;
+    country_short:      string;
+    street_number?:     string;
+    street_name?:       string;
+    name?:              string;
     street_name_short?: string;
-    city: string;
-    state: string;
-    post_code: string;
-    country: string;
-    country_short: string;
-    name?: string;
-    state_short?: string;
 }
 
 export interface Content {
-    rendered: string;
+    rendered:  string;
     protected: boolean;
 }
 
