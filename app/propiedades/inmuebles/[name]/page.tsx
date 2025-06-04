@@ -98,6 +98,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
             id,
             tipo_inmueble_nombre,
             ciudad_nombre,
+            moneda,
             maps,
         } = inmueble;
 
@@ -127,7 +128,8 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                         </div>
 
                         <div className="flex items-center gap-2">
-                            <span className="text-2xl md:text-3xl font-bold">{precio}</span>
+                            <span className="text-2xl md:text-3xl font-bold">${precio}</span>
+                            <Badge className=" bg-green-800 text-white">{moneda}</Badge>
                             <Badge className="ml-2">{tipo_operacion === "venta" ? "Venta" : "Alquiler"}</Badge>
                         </div>
                     </div>

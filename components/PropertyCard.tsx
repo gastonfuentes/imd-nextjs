@@ -25,6 +25,7 @@ interface PropertyCardProps {
     whatsappNumber?: string
     slug: string
     operation: string
+    moneda: string
 }
 
 export default function PropertyCard({
@@ -44,7 +45,8 @@ export default function PropertyCard({
     ],
     whatsappNumber = "+5493804218592",
     slug,
-    operation
+    operation,
+    moneda
 }: PropertyCardProps) {
 
     const router = useRouter(); // Inicializar useRouter
@@ -85,8 +87,11 @@ export default function PropertyCard({
                     <CarouselPrevious className="left-2" />
                     <CarouselNext className="right-2" />
                 </Carousel>
-
-                <Badge className="absolute top-3 left-3 z-10 bg-primary text-white">${price}</Badge>
+                <div className="absolute top-3 left-3 z-10 flex gap-1">
+                <Badge className=" bg-primary text-white">${price}</Badge>
+                <Badge className=" bg-green-800 text-white">{moneda}</Badge>
+                </div>
+                
                 <Badge className="absolute top-3 right-3 z-10 bg-accent text-white">{operation === '7' ? 'Comprar' : 'Alquilar'}</Badge>
 
             </div>

@@ -23,4 +23,5 @@ export interface SimpleInmueble {
     destacado: boolean;
     maps: GoogleMaps;
     banios: string | undefined;
+    moneda: string
 }
