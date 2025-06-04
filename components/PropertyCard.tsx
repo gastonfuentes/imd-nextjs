@@ -43,7 +43,7 @@ export default function PropertyCard({
         "/placeholder.svg?height=400&width=600",
         "/placeholder.svg?height=400&width=600",
     ],
-    whatsappNumber = "+5493804218592",
+    whatsappNumber = "+5492984311656",
     slug,
     operation,
     moneda
