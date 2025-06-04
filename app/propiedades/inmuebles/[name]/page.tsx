@@ -10,6 +10,7 @@ import PropertyContactForm from '@/components/PropertyContactForm';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { GoogleMapsCard } from '@/components/GoogleMaps';
+import PropertyShared from '@/components/PropertyShared';
 
 
 
@@ -255,13 +256,8 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                         <div className="sticky top-8">
                             <PropertyContactForm propertyId={id} propertyTitle={title} propertyUrl={propertyUrl} />
 
-                            <div className="mt-4 flex justify-center">
-                                <Button variant="outline" className="w-full">
-                                    <Share2 className="h-4 w-4 mr-2" />
-                                    Compartir propiedad
-                                </Button>
-                            </div>
-                        </div>
+                            < PropertyShared propertyUrl={propertyUrl} title={title}/>
+                         </div>   
                     </div>
                 </div>
             </main >
