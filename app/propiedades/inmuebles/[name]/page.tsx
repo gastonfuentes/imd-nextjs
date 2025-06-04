@@ -3,12 +3,12 @@ import { SimpleInmueble } from '../../../../inmuebles/interfaces/simple-inmueble
 /* import Image from 'next/image';
 import placeholder from '@/app/images/image.png'; */
 import Link from 'next/link';
-import { ArrowLeft, BedDouble, Building2, Car, Flame, Home, MapPin, Ruler, Share2, Tag } from 'lucide-react';
+import { ArrowLeft, BedDouble, Building2, Car, Flame, Home, MapPin, Ruler,  Tag } from 'lucide-react';
 import PropertyImageGallery from '@/components/PropertyImageGallery';
 import { Card, CardContent } from '@/components/ui/card';
 import PropertyContactForm from '@/components/PropertyContactForm';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+
 import { GoogleMapsCard } from '@/components/GoogleMaps';
 import PropertyShared from '@/components/PropertyShared';
 
