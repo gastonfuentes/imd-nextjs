@@ -145,8 +145,7 @@ export default async function PropiedadPage({ params, }: { params: Promise<{ nam
                         <Card className="mb-8">
                             <CardContent className="p-6">
                                 <h2 className="text-xl font-semibold mb-4">Descripción</h2>
-                                <p className="text-muted-foreground whitespace-pre-line">{descripcion} Encantadora casa en alquiler ideal para descansar y desconectar
-                                    Ubicada en una zona tranquila y segura, esta acogedora propiedad ofrece todo lo que necesitás para una estadía cómoda y placentera. Cuenta con ambientes amplios y luminosos, dos dormitorios equipados, cocina completa, living-comedor con vista al jardín y un patio ideal para disfrutar al aire libre.</p>
+                                <p className="text-muted-foreground whitespace-pre-line">{descripcion} </p>
                             </CardContent>
                         </Card>
 
