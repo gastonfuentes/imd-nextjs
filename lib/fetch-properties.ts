@@ -3,10 +3,7 @@ import { SimpleInmueble } from "../inmuebles/interfaces/simple-inmueble";
 import { extractImagesFromContent } from "./extract-images";
 import { fetchTiposInmueblesMap } from "./fetch-tipo-inmuebles";
 import { fetchTiposOperacionMap } from "./fetch-tipo-operacion";
-import {
-  fetchUbicacionesIdToNameMap,
-  fetchUbicacionesMap,
-} from "./fetch-ubicaciones";
+import { fetchUbicacionesMap } from "./fetch-ubicaciones";
 
 // Función para obtener todas las propiedades con datos completos
 export const fetchProperties = async (): Promise<SimpleInmueble[]> => {

@@ -56,19 +56,19 @@ export const fetchUbicacionesMap = async (): Promise<
   return ubicacionesMap;
 };
 
-export const fetchUbicacionesIdToNameMap = async (): Promise<
-  Record<string, string>
-> => {
-  const res = await fetch(
-    "https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/ciudades"
-  );
-  const data: Ubicacion[] = await res.json();
+// export const fetchUbicacionesIdToNameMap = async (): Promise<
+//   Record<string, string>
+// > => {
+//   const res = await fetch(
+//     "https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/ciudades"
+//   );
+//   const data: Ubicacion[] = await res.json();
 
-  // Construir el mapa con el ID como clave y el nombre como valor
-  const ubicacionesMap = data.reduce((acc, ubicacion) => {
-    acc[ubicacion.id.toString()] = ubicacion.name; // ID -> Nombre
-    return acc;
-  }, {} as Record<string, string>);
+//   // Construir el mapa con el ID como clave y el nombre como valor
+//   const ubicacionesMap = data.reduce((acc, ubicacion) => {
+//     acc[ubicacion.id.toString()] = ubicacion.name; // ID -> Nombre
+//     return acc;
+//   }, {} as Record<string, string>);
 
-  return ubicacionesMap;
-};
+//   return ubicacionesMap;
+// };
