@@ -55,12 +55,6 @@ export default function PropertyCard({
 }: PropertyCardProps) {
   const router = useRouter(); // Inicializar useRouter
 
-  /*     const handleWhatsAppClick = () => {
-            const message = `Hola, Estoy interesado/a en esta propiedad: ${title} (ID: ${id})`
-            const encodedMessage = encodeURIComponent(message)
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, "_blank")
-        } */
-
   const handleWhatsAppClick = () => {
     const propertyUrl = `${window.location.origin}/propiedades/inmuebles/${slug}`; // Construir la URL completa de la propiedad
     const message = `Hola, estoy interesado/a en esta propiedad: ${title} (ID: ${id}). Puedes ver más detalles aquí: ${propertyUrl}`;
