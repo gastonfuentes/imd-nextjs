@@ -1,7 +1,10 @@
 import { InmueblesResponse } from "../inmuebles/interfaces/inmuebles-response";
 import { SimpleInmueble } from "../inmuebles/interfaces/simple-inmueble";
 import { extractImagesFromContent } from "./extract-images";
-import { fetchTiposInmueblesMap } from "./fetch-tipo-inmuebles";
+import {
+  fetchTiposInmueblesMap,
+  fetchTiposInmueblesNombres,
+} from "./fetch-tipo-inmuebles";
 import { fetchTiposOperacionMap } from "./fetch-tipo-operacion";
 import { fetchUbicacionesMap } from "./fetch-ubicaciones";
 
@@ -211,6 +214,9 @@ export const fetchPropertyBySlug = async (
   slug: string
 ): Promise<SimpleInmueble> => {
   try {
+    // Obtener los tipos de inmuebles (nombres reales)
+    const tiposInmueblesNombres = await fetchTiposInmueblesNombres();
+
     const res = await fetch(
       `https://bisque-giraffe-421578.hostingersite.com/wp-json/wp/v2/inmuebles?slug=${slug}`
     );
@@ -246,8 +252,11 @@ export const fetchPropertyBySlug = async (
       tipo_operacion:
         inmuebleData.tipo_operacion?.[0]?.toString() || "Desconocido",
       ciudad: inmuebleData.ciudades?.[0]?.toString() || "Desconocido",
-      ciudad_nombre: "Desconocido",
-      tipo_inmueble_nombre: "Desconocido",
+      ciudad_nombre: inmuebleData.acf.google_maps?.city || "Desconocido",
+      tipo_inmueble_nombre:
+        tiposInmueblesNombres[
+          inmuebleData.tipo_inmueble?.[0]?.toString() || ""
+        ] || "Desconocido",
       destacado: inmuebleData.acf.destacado || false,
       banios: inmuebleData.acf.banios || undefined,
       moneda: inmuebleData.acf.moneda || "ARG",
