@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "IMD Inmobiliaria" }],
   creator: "IMD Inmobiliaria",
+  verification: {
+    google: "zP4qBW71IYL2cH8jIl9WbladAPm1k27C-OpR-HZsknE",
+  },
   openGraph: {
     title: "IMD Inmobiliaria - Propiedades en Neuquén y Región",
     description:
