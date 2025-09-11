@@ -191,7 +191,7 @@ export default async function PropiedadPage({
               <span className="text-2xl md:text-3xl font-bold">${precio}</span>
               <Badge className=" bg-green-800 text-white">{moneda}</Badge>
               <Badge className="ml-2">
-                {tipo_operacion === "venta" ? "Venta" : "Alquiler"}
+                {tipo_operacion === "7" ? "Venta" : "Alquiler"}
               </Badge>
             </div>
           </div>
